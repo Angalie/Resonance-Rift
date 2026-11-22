@@ -985,19 +985,21 @@ html[data-tone="light"] .dicon.sel{border-color:#521f66}
 .win-set .s-av{flex:none;width:52px;height:52px;image-rendering:pixelated;margin-top:6px;filter:drop-shadow(0 2px 0 rgba(73,42,85,.3))}
 .win-set .bub{position:relative;flex:1;min-width:0;padding:12px 14px 14px;border:4px solid #492a55;border-radius:18px;box-shadow:3px 3px 0 rgba(73,42,85,.3)}
 .win-set .bub::before{content:"";position:absolute;left:-14px;top:22px;width:14px;height:14px;background:inherit;border-left:4px solid #492a55;border-bottom:4px solid #492a55;transform:skewY(-40deg)}
-.win-set .b1{background:#f59aad;color:#ffffff}
-.win-set .b2{background:#fdf1f3;color:#e0526f}
+.win-set .b1{background:#f59aad;color:#3e1255}
+.win-set .b2{background:#e6d6f5;color:#4f1d73}
 .win-set .bub h3{margin:0 0 8px;font:400 1rem/1.2 var(--f-pixel);text-transform:lowercase;color:inherit}
-.win-set .swatches{gap:12px 10px}
-.win-set .bub .sw{height:auto;min-height:62px;justify-content:flex-start;background:#fff7f9;border-color:#492a55;color:#4d2a5b;width:70px;box-shadow:2px 2px 0 rgba(73,42,85,.3)}
-.win-set .bub .sw[aria-pressed="true"]{outline:3px solid #ffffff;outline-offset:1px;background:#fcabbc}
-.win-set .b2 .sw[aria-pressed="true"]{outline-color:#e0526f}
+.win-set .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(82px,1fr));gap:10px}
+.win-set .bub .sw{height:auto;min-height:62px;justify-content:flex-start;background:#e6d6f5;border-color:#492a55;color:#3e1255;width:auto;min-width:0;padding:7px 5px 6px;gap:6px;font-size:.7rem;line-height:1.25;text-align:center;overflow-wrap:anywhere;box-shadow:2px 2px 0 rgba(73,42,85,.3)}
+.win-set .bub .sw[aria-pressed="true"]{outline:3px solid #d9c2f2;outline-offset:1px;background:#fcabbc}
+.win-set .b2 .sw[aria-pressed="true"]{outline-color:#8C45A8}
 .win-set .bub .set-row label{color:inherit}
+.win-set .bub .sw i{height:36px;min-height:36px}
+.win-set .bub .sw.up i{background:repeating-linear-gradient(45deg,#e6d6f5 0 6px,#d3bdee 6px 12px);color:#6b2c8c}
 .win-set .s-hint{margin:8px 0 0;font:500 .8rem/1.35 var(--f-body);color:inherit;opacity:.92}
 .win-set .s-bar{display:flex;align-items:center;gap:8px;padding:6px;background:#fbd6de;border:3px solid #683b7a;border-radius:12px}
 .win-set .s-field{flex:1;min-width:0;padding:8px 12px;background:#ece3ef;border:3px solid #9b8a98;border-radius:8px;color:#9b8a98;font:400 .85rem/1.2 var(--f-pixel);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .win-set .s-send{appearance:none;-webkit-appearance:none;margin:0;padding:8px 14px;border:3px solid #492a55;border-radius:10px;background:#f46885;color:#ffffff;font:400 .85rem/1.2 var(--f-pixel);cursor:pointer;box-shadow:inset 2px 2px 0 rgba(255,255,255,.35),2px 2px 0 rgba(73,42,85,.35);transform:none}
-.win-set .s-send.alt{background:#fff7f9;color:#e0526f}
+.win-set .s-send.alt{background:#e6d6f5;color:#4f1d73}
 .win-set .s-send:active{transform:translate(2px,2px);box-shadow:none}
 .win-set .gm{flex:1;min-height:0;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:10px;color:#4d2a5b;border:3px solid #683b7a;border-radius:8px;background:repeating-conic-gradient(#e7caf2 0 25%,#f6cdd5 0 50%) 0 0/72px 72px}
 .gm-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:6px 10px;background:#fbd6de;border:3px solid #683b7a;border-radius:10px;font:400 .78rem/1.3 var(--f-pixel)}
@@ -1150,6 +1152,29 @@ html[data-tone="light"] .dicon.sel{border-color:#521f66}
 #offerForm .oc-bar .btn.primary{flex:none;border:3px solid #492a55;border-radius:10px;background:#f46885;color:#ffffff;box-shadow:inset 2px 2px 0 rgba(255,255,255,.35),2px 2px 0 rgba(73,42,85,.35);font:400 .8rem/1.2 var(--f-pixel);padding:9px 16px}
 @media (max-width:700px){#offerForm .oc-av{display:none}#offerForm .oc-bub::before{display:none}#offerForm .oc-bar{flex-wrap:wrap}}
 /* pixel avatar + status screen (purple and pink) */
+/* File Explorer + desktop icon menu */
+.dctx{position:fixed;z-index:99000;min-width:180px;padding:4px;background:#fee5ea;border:3px solid #46235a;border-radius:8px;box-shadow:4px 4px 0 rgba(70,35,84,.35)}
+.dctx button{appearance:none;-webkit-appearance:none;display:block;width:100%;margin:0;padding:7px 10px;text-align:left;background:none;border:0;border-radius:4px;color:#4a1f5b;font:400 .78rem/1.2 var(--f-pixel);cursor:pointer;box-shadow:none;transform:none}
+.dctx button:hover,.dctx button:focus-visible{background:#F58EA3;color:#3a1250;outline:none}
+.win-set .gm.fx{flex-direction:row;gap:0;padding:0;overflow:hidden}
+.fx-nav{flex:none;width:132px;display:flex;flex-direction:column;gap:4px;padding:8px;border-right:3px solid #683b7a;background:rgba(255,255,255,.4);overflow:auto}
+.fx-nav button{appearance:none;-webkit-appearance:none;display:flex;align-items:center;gap:8px;margin:0;padding:6px 8px;border:2px solid transparent;border-radius:6px;background:none;color:#4d2a5b;font:400 .76rem/1.2 var(--f-pixel);text-align:left;cursor:pointer;box-shadow:none;transform:none}
+.fx-nav button img{width:20px;height:20px;flex:none;image-rendering:pixelated}
+.fx-nav button:hover{background:rgba(245,142,163,.35)}
+.fx-nav button[aria-current="true"]{background:#F58EA3;border-color:#683b7a;color:#3a1250}
+.fx-nav button:focus-visible{outline:3px dashed #8C45A8;outline-offset:2px}
+.fx-main{flex:1;min-width:0;display:flex;flex-direction:column}
+.fx-path{padding:8px 12px;border-bottom:2px solid #683b7a;font:400 .74rem/1.2 var(--f-pixel);color:#4d2a5b}
+.fx-list{flex:1;min-height:0;overflow:auto;padding:8px}
+.fx-l{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.fx-r{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:6px 8px;border:2px solid #683b7a;border-radius:8px;background:#fff6f8}
+.fx-r>img{width:32px;height:32px;flex:none;image-rendering:pixelated}
+.fx-n{flex:1;min-width:120px}
+.fx-n b{display:block;font-weight:400;font-size:.82rem;color:#3a1250;overflow-wrap:anywhere}
+.fx-n small{display:block;color:#6a417a;font-size:.72rem}
+.fx-a{display:flex;gap:6px;flex-wrap:wrap}
+.fx-empty{margin:24px 10px;text-align:center;color:#6a417a;font-size:.85rem}
+@media (max-width:560px){.win-set .gm.fx{flex-direction:column}.fx-nav{width:auto;flex-direction:row;flex-wrap:wrap;border-right:0;border-bottom:3px solid #683b7a}}
 .pxlayout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:20px;align-items:start}
 @media (max-width:900px){.pxlayout{grid-template-columns:1fr}}
 @media (min-width:901px){.pxlayout>div:first-child{position:sticky;top:8px;align-self:start}}
@@ -4108,7 +4133,7 @@ document.addEventListener('click', e => {
    5b. DESKTOP SHELL + NOTEPAD
    ===================================================================== */
 const ICO = {"gear":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAXUlEQVR4nGNgoCVwUw75D8JEKcQm1uO6AoxxyaMoRFaErBmbIRh6kAWwaUY2BJuFOG3FZxDWcMBmGzZXEbSdUKBiqKHYAIq9QHEgUhSNVEtI+LyENynjA0RnJkoAABuQI8DN7BeHAAAAAElFTkSuQmCC","envelope":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAWElEQVR4nGNgGBTATTnkPzkYxYD/3z+QhDEMIMUQnC4gxhBktVi9gM8QdHU4wwDdS9i8SFQg4gsbggZ87VsMxuhskg1AxiR7AZdmog2AGUJ0QiI7KQ8oAACX1gMLQQqyHgAAAABJRU5ErkJggg==","bow":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAZklEQVR4nGNgGDTATTnkPzImSR4k8LVvMQpGVkRIHq7g/8lrYAxTgIyxyWM1AN0WdNvxGoCuucd1BRiT5AVshmBzBW3CgOxYwBXP2Ni40gnWhIXTNlI0U2QAcgASbQg2DSQbQgoAAMy1TnTKWTsVAAAAAElFTkSuQmCC","heart":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAWklEQVR4nGNgGDTATTnkPzImSR4k8LVvMQpGVoRXHlny/8lrYIysCJtmFEPQDcClmCgDSMXUMQBXIBGtGV9IE62ZFENwaibGEIKaiU1YJBtCsmZkQ8jWTCwAAPdRhvAZ4iqmAAAAAElFTkSuQmCC","star":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAZUlEQVR4nGNgoCVwUw75D8Jka/514hoYk2UIRQbANP///oGwITB/omN0A2CGoGMUp5KK4a4ixxAML5FiCN7wIFszxQZg04wcIwQNQVeInIzRDcIbgPjSP7JBKGpQEgYRgKJMhg4AlgV6K+MnKIcAAAAASUVORK5CYII=","floppy":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAVklEQVR4nGNgoAZwUw75TyrGMCBaoxiOzx+7hoGR5TEMwWYAsm3oBsAMoa0B+LxA0ABiMFYD/n//QBTGawDM3/jYtHcBOo0uRlsXUGQARdFIcYYiFwAA4V7hqLe6CYcAAAAASUVORK5CYII=","rift":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAV0lEQVR4nGNgoBZwUw75TwrG0BytUUwSRjEExOlxXUESxjCAHIxiwP+T10jCRBnwtW8xGJNlAEjjrxPXwBibIXgNgGmGuQCbIbR1AVXCgORYoCgdDG0AAKJfw4STS1fCAAAAAElFTkSuQmCC","pad":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAQklEQVR4nGNgoBZwUw75TwrG0Py1bzHRGKcBxNiM0wCKvfD/+weiMU4DYH4k2wCKXUCM3wfOBYMjDGjrAopSIiUAAMk17NQ5T4NuAAAAAElFTkSuQmCC","store":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAASUlEQVR4nGNgGJTATTnkPzZMkgHEiFHXAFzOJto7IMH/J68RhYky4GvfYjBGZ5NsADImyQB0Q0j2ArIhZIUBxYFIlgEUpYMBAwB9BkomTI0aMwAAAABJRU5ErkJggg==","cards":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAVElEQVR4nGNgoAZwUw75jw8TZUCP6wqsmL4G/P/+AY5J8hY2F4DEkA1EN5x+BnztWwzGyGyyDEDGJHsBWTPZYQDTjNMAbJjoQMSVNgbeAIoyGLEAABzylD0vLYYnAAAAAElFTkSuQmCC","snake":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAATUlEQVR4nGNgoCaI1ij+TyzGacDXvsUEcY/rCvIM+P/9w3835RDyDYBhor1AcRjgVIgLUN0FFIfBwBiACxM0gFDSJcoAYpxPWwPIyY0ApD6pHDkcqfQAAAAASUVORK5CYII="};
-ICO.rift = document.querySelector('.brand-logo')?.getAttribute('src') || ICO.rift;   // the Resonance Rift logo is the app icon everywhere
+ICO.rift = document.querySelector('.brand-logo')?.getAttribute('src') || ICO.rift; ICO.folder = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAOklEQVR4nGNgGBTASz76Py5MtAE9riswMMUGwAwh6DoQ5/eBMyRhDAO+9i0mCY8aMCgNIAcTlUppDgAY3KBxVggjNQAAAABJRU5ErkJggg==';   // the Resonance Rift logo is the app icon everywhere
 const LETTERS = 'bs_letters';
 const OS = { wins: {}, order: [], apps: {} };
 const deskEl = () => document.getElementById('desk');
@@ -4537,6 +4562,48 @@ function sceneUrl(kind) {
   return (SCENE_CACHE[kind] = c.toDataURL('image/png'));
 }
 
+/* "Two colours": a pixel-art landscape painted from the two chosen colours (sky from top colour to bottom colour, hills and pines in shades of the bottom colour) */
+const SCENE_CUST = {};
+function sceneCustom(c1, c2) {
+  const key = c1 + c2; if (SCENE_CUST[key]) return SCENE_CUST[key];
+  if (Object.keys(SCENE_CUST).length > 12) for (const k in SCENE_CUST) delete SCENE_CUST[k];
+  const W = 320, H = 180, c = document.createElement('canvas'); c.width = W; c.height = H;
+  const x = c.getContext('2d');
+  const A = hexRgb(c1), B = hexRgb(c2);
+  const hex = v => '#' + v.map(n => Math.max(0, Math.min(255, Math.round(n))).toString(16).padStart(2, '0')).join('');
+  const mix = (p, q, t) => p.map((n, i) => n + (q[i] - n) * t);
+  const WHITE = [255, 255, 255], BLACK = [12, 4, 24];
+  const px = (col, X, Y, w = 1, hh = 1) => { x.fillStyle = col; x.fillRect(Math.round(X), Math.round(Y), w, hh); };
+  let seed = (parseInt(c1.slice(1), 16) ^ parseInt(c2.slice(1), 16)) % 2147483646 + 1;
+  const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+  const blob = (cx, cy, rad, col) => { for (let dy = -rad; dy <= rad; dy++) for (let dx = -rad; dx <= rad; dx++) if (dx * dx + dy * dy <= rad * rad) px(col, cx + dx, cy + dy); };
+  const cloud = (cx, cy, s, col) => { [[0, 0, 5], [6, 1, 4], [-6, 1, 4], [11, 3, 3], [-11, 3, 3]].forEach(([ox, oy, rad]) => blob(cx + ox * s, cy + oy * s, rad * s, col)); };
+  // sky: stepped bands with a dithered seam between each band
+  const N = 14, SKY_H = 128, bh = SKY_H / N;
+  for (let i = 0; i < N; i++) {
+    const y0 = Math.round(i * bh), y1 = Math.round((i + 1) * bh);
+    px(hex(mix(A, B, i / (N - 1))), 0, y0, W, y1 - y0);
+    if (i < N - 1) { const nxt = hex(mix(A, B, (i + 1) / (N - 1))); for (let X = 0; X < W; X += 2) px(nxt, X + (i % 2), y1 - 2, 1, 1); for (let X = 0; X < W; X += 4) px(nxt, X + 1, y1 - 1, 1, 1); }
+  }
+  const dark = relLum(A) < .22;
+  if (dark) {
+    for (let i = 0; i < 90; i++) { const X = rnd() * W, Y = rnd() * 80, col = hex(mix(WHITE, B, rnd() * .4)); px(col, X, Y); if (rnd() > .9) { px(col, X - 1, Y); px(col, X + 1, Y); px(col, X, Y - 1); px(col, X, Y + 1); } }
+  } else {
+    cloud(70, 34, 2, hex(mix(mix(A, B, .15), WHITE, .75))); cloud(250, 56, 2, hex(mix(mix(A, B, .3), WHITE, .7))); cloud(160, 20, 1, hex(mix(mix(A, B, .1), WHITE, .8)));
+  }
+  // sun or moon
+  blob(236, 46, 15, hex(mix(B, WHITE, .55))); blob(236, 46, 12, hex(mix(B, WHITE, .8)));
+  // three hills and a row of pines
+  const hill = (col, base, amp, freq, phase) => { const ys = []; for (let X = 0; X < W; X++) { const Y = Math.round(base + Math.sin(X * freq + phase) * amp + Math.sin(X * freq * 2.3 + phase * 1.7) * amp * .4); ys[X] = Y; px(col, X, Y, 1, H - Y); } return ys; };
+  hill(hex(mix(B, BLACK, .18)), 122, 7, .02, 0.7);
+  const h2 = hill(hex(mix(B, BLACK, .36)), 142, 7, .028, 2.6);
+  const h3 = hill(hex(mix(B, BLACK, .58)), 160, 5, .035, 4.4);
+  const pine = (X, Y, hgt, col) => { for (let i = 0; i < hgt; i++) { const w = Math.max(1, Math.round(i * .45)); px(col, X - (w >> 1), Y - hgt + i, w + 1, 1); } px(col, X, Y, 1, 3); };
+  for (let i = 0; i < 9; i++) { const X = 12 + i * 36 + ((rnd() * 10) | 0); pine(X, h2[Math.min(W - 1, X)] + 3, 9 + ((rnd() * 5) | 0), hex(mix(B, BLACK, .5))); }
+  for (let i = 0; i < 18; i++) { const X = 6 + i * 18 + ((rnd() * 8) | 0); pine(X, h3[Math.min(W - 1, X)] + 2, 13 + ((rnd() * 9) | 0), hex(mix(B, BLACK, .72))); }
+  return (SCENE_CUST[key] = c.toDataURL('image/png'));
+}
+
 const WALLS = {
   sky: { n: 'Pixel sky', prev: 'linear-gradient(180deg,#8fc0f5,#f3bbdc)' },
   dusk: { n: 'Dusk', art: 'dusk', g: ['#5b3a8c', '#c2679d', '#f6b27a'] },
@@ -4581,8 +4648,9 @@ function applyDesk() {
     rs.setProperty('background-image', 'url("' + imgGet() + '")'); rs.setProperty('background-size', 'cover'); rs.setProperty('background-position', 'center'); rs.setProperty('background-repeat', 'no-repeat'); rs.setProperty('background-attachment', 'fixed'); rs.setProperty('background-color', '#2a1d3a');
   } else {
     const cols = d.wall === 'custom' ? [d.c1, d.c2] : WALLS[d.wall].g;
-    rs.setProperty('background-image', 'linear-gradient(180deg,' + cols.join(',') + ')'); rs.setProperty('background-size', '100% 100%');
-    rs.setProperty('background-position', '0 0'); rs.setProperty('background-repeat', 'no-repeat'); rs.setProperty('background-attachment', 'fixed'); rs.setProperty('background-color', cols[0]);
+    if (d.wall === 'custom') { rs.setProperty('background-image', 'url("' + sceneCustom(d.c1, d.c2) + '")'); rs.setProperty('background-size', 'cover'); rs.setProperty('background-position', 'center bottom'); }
+    else { rs.setProperty('background-image', 'linear-gradient(180deg,' + cols.join(',') + ')'); rs.setProperty('background-size', '100% 100%'); rs.setProperty('background-position', '0 0'); }
+    rs.setProperty('background-position', d.wall === 'custom' ? 'center bottom' : '0 0'); rs.setProperty('background-repeat', 'no-repeat'); rs.setProperty('background-attachment', 'fixed'); rs.setProperty('background-color', cols[0]);
   }
   const acc = ['--tb-a', '--tb-b', '--tb-ink', '--acc-a', '--acc-b', '--on-acc', '--tk-a', '--tk-b', '--tk-edge', '--tk-ink', '--tk-top'];
   if (!d.acc) acc.forEach(p => rs.removeProperty(p));
@@ -4619,11 +4687,11 @@ function settingsMount(rec) {
       '<div class="s-chat">' +
         '<div class="s-row"><img class="s-av" alt="" src="' + ICO.bow + '"><div class="bub b1"><h3>Wallpaper</h3><div class="swatches">' +
           Object.entries(WALLS).map(([k, w]) => wallBtn(k, w.n, w.art ? 'center/cover url(' + sceneUrl(w.art) + ')' : (w.prev || 'linear-gradient(180deg,' + w.g.join(',') + ')'))).join('') +
-          wallBtn('custom', 'Two colours', 'linear-gradient(180deg,' + d.c1 + ',' + d.c2 + ')') +
+          wallBtn('custom', 'Two colours', 'center/cover url(' + sceneCustom(d.c1, d.c2) + ')') +
           '<button type="button" class="sw up" data-up="1" title="Upload your own picture"><i>+</i><span>Upload image</span></button>' +
           (img ? wallBtn('image', 'Your image', 'center/cover url(' + img + ')') : '') + '</div>' +
           '<div class="set-row"><label>Top <input type="color" id="dsC1" value="' + d.c1 + '"></label><label>Bottom <input type="color" id="dsC2" value="' + d.c2 + '"></label></div>' +
-          '<p class="s-hint">"Two colours" makes a gradient from the pickers above. Tap "Upload image" to use your own picture.</p></div></div>' +
+          '<p class="s-hint">"Two colours" paints a pixel landscape from the pickers above. Tap "Upload image" to use your own picture.</p></div></div>' +
         '<div class="s-row"><img class="s-av" alt="" src="' + ICO.heart + '"><div class="bub b2"><h3>Accent colour</h3><div class="swatches">' +
           ACCENTS.map(([n, c]) => '<button type="button" class="sw" data-acc="' + (c || '') + '" aria-pressed="' + ((d.acc || '') === (c || '')) + '"><i style="background:' + (c || '#f58ea3') + '"></i><span>' + n + '</span></button>').join('') + '</div>' +
           '<div class="set-row"><label>Your own <input type="color" id="dsAcc" value="' + (d.acc || '#f58ea3') + '"></label></div>' +
@@ -4677,9 +4745,65 @@ const APPS_KEY = 'rr_apps';
 let iconsRefresh = () => {};
 const appsInstalled = () => { try { return JSON.parse(localStorage.getItem(APPS_KEY) || '[]').filter(k => OS.apps[k] && OS.apps[k].store); } catch { return []; } };
 const appInstalled = k => !!(OS.apps[k] && (OS.apps[k].core || appsInstalled().includes(k)));
-function appInstall(k) { const l = appsInstalled(); if (!l.includes(k)) l.push(k); try { localStorage.setItem(APPS_KEY, JSON.stringify(l)); } catch { return toast("Couldn't save that here."); } iconsRefresh(); toast('Installed ' + OS.apps[k].label + '. Find it on your desktop and in the Start menu.'); }
+function appInstall(k) { iconShow(k, true); const l = appsInstalled(); if (!l.includes(k)) l.push(k); try { localStorage.setItem(APPS_KEY, JSON.stringify(l)); } catch { return toast("Couldn't save that here."); } iconsRefresh(); toast('Installed ' + OS.apps[k].label + '. Find it on your desktop and in the Start menu.'); }
 function appRemove(k) { osClose(k, true); try { localStorage.setItem(APPS_KEY, JSON.stringify(appsInstalled().filter(x => x !== k))); } catch {} iconsRefresh(); toast('Removed ' + OS.apps[k].label + '.'); }
 OS.apps.rr.core = OS.apps.notepad.core = OS.apps.help.core = OS.apps.settings.core = true;
+
+/* ---- Desktop icons can be removed from the desktop (they stay in the Start menu and in File Explorer) ---- */
+const HID_KEY = 'rr_hidden';
+const iconsHidden = () => { try { const raw = localStorage.getItem(HID_KEY); return (raw === null ? ['help'] : JSON.parse(raw)).filter(k => OS.apps[k]); } catch { return ['help']; } };   /* Help starts off the desktop (still in Start and File Explorer) */
+const iconsChanged = () => { iconsRefresh(); document.dispatchEvent(new Event('rr-icons')); };
+function iconHide(k) {
+  const l = iconsHidden(); if (!l.includes(k)) l.push(k);
+  try { localStorage.setItem(HID_KEY, JSON.stringify(l)); } catch { return toast("Couldn't save that here."); }
+  iconsChanged(); toast(OS.apps[k].label + ' removed from the desktop. Add it back any time in File Explorer.');
+}
+function iconShow(k, quiet) {
+  try { localStorage.setItem(HID_KEY, JSON.stringify(iconsHidden().filter(x => x !== k))); } catch {}
+  iconsChanged(); if (!quiet) toast(OS.apps[k].label + ' is back on the desktop.');
+}
+
+/* ---- File Explorer: where every app and note lives ---- */
+OS.apps.files = {
+  title: 'explorer.exe', label: 'File Explorer', icon: 'folder', w: 580, h: 480, x: 190, y: 40, minW: 380, minH: 340, cls: 'win-set win-files', core: true,
+  mount(rec) {
+    let loc = 'desktop', gen = 0, notes = [];
+    const NAV = [['desktop', 'Desktop', 'heart'], ['apps', 'All apps', 'store'], ['notes', 'Notes', 'envelope'], ['archive', 'Archive', 'floppy']];
+    const NAME = { desktop: 'Desktop', apps: 'All apps', notes: 'Notes', archive: 'Archive' };
+    const shell = body => '<div class="gm fx"><nav class="fx-nav" aria-label="Places">' + NAV.map(([k, l, i]) => '<button type="button" data-loc="' + k + '"' + (k === loc ? ' aria-current="true"' : '') + '><img alt="" src="' + ICO[i] + '">' + l + '</button>').join('') + '</nav><div class="fx-main"><div class="fx-path">This PC › ' + NAME[loc] + '</div><div class="fx-list" aria-live="polite">' + body + '</div></div></div>';
+    const draw = async () => {
+      const my = ++gen; let body = '';
+      if (loc === 'desktop' || loc === 'apps') {
+        const hid = iconsHidden();
+        const rows = Object.entries(OS.apps).filter(([k]) => appInstalled(k) && (loc === 'apps' || !hid.includes(k)));
+        body = rows.length ? '<ul class="fx-l">' + rows.map(([k, a]) => { const on = !hid.includes(k);
+          return '<li class="fx-r"><img alt="" src="' + ICO[a.icon] + '"><div class="fx-n"><b>' + esc(a.label) + '</b><small>' + (a.store ? esc(a.store.cat) : 'Built-in app') + (loc === 'apps' ? (on ? ' · On desktop' : ' · Not on desktop') : '') + '</small></div><div class="fx-a"><button type="button" class="gm-btn" data-open="' + k + '">Open</button>' + (on ? '<button type="button" class="gm-btn alt" data-hide="' + k + '">Remove from desktop</button>' : '<button type="button" class="gm-btn" data-show="' + k + '">Add to desktop</button>') + '</div></li>'; }).join('') + '</ul>'
+          : '<p class="fx-empty">The desktop is empty. Open All apps to put icons back.</p>';
+      } else if (!S.user) {
+        body = '<p class="fx-empty">Log in to Resonance Rift to see the notes saved in your account.</p>';
+      } else {
+        rec.body.innerHTML = shell('<p class="fx-empty">Loading…</p>');
+        try { notes = (await S.store.listWhere(LETTERS, 'owner', '==', me())).filter(l => l && l.owner === me() && !l.deleted).sort((a, b) => b.updatedAt - a.updatedAt); } catch { notes = []; }
+        if (my !== gen) return;
+        const list = notes.filter(l => loc === 'archive' ? l.archived : !l.archived);
+        body = list.length ? '<ul class="fx-l">' + list.map(l => '<li class="fx-r"><img alt="" src="' + ICO.envelope + '"><div class="fx-n"><b>' + esc(l.title || 'Untitled') + '</b><small>' + esc(new Date(l.updatedAt).toLocaleString()) + '</small></div><div class="fx-a"><button type="button" class="gm-btn" data-note="' + esc(l.id) + '">Open</button></div></li>').join('') + '</ul>'
+          : '<p class="fx-empty">' + (loc === 'archive' ? 'Nothing archived.' : 'No saved notes yet. Write one in Notepad and press SAVE.') + '</p>';
+      }
+      if (my !== gen) return;
+      rec.body.innerHTML = shell(body);
+    };
+    rec.body.addEventListener('click', e => {
+      const n = e.target.closest('[data-loc]'), o = e.target.closest('[data-open]'), hd = e.target.closest('[data-hide]'), sh = e.target.closest('[data-show]'), nt = e.target.closest('[data-note]');
+      if (n) { loc = n.dataset.loc; draw(); }
+      else if (o) osLaunch(o.dataset.open);
+      else if (hd) iconHide(hd.dataset.hide);
+      else if (sh) iconShow(sh.dataset.show);
+      else if (nt) { const l = notes.find(x => x.id === nt.dataset.note); if (!l) return; osOpen('notepad'); npGuard(() => { npReset(l.id, l.title, l.text, l.archived); npHideNotes(); }); }
+    });
+    document.addEventListener('rr-icons', () => { if (rec.body.isConnected && (loc === 'desktop' || loc === 'apps')) draw(); });
+    draw();
+  },
+};
 
 OS.apps.store = {
   title: 'app store', label: 'App Store', icon: 'store', w: 520, h: 580, x: 220, y: 24, minW: 360, minH: 420, cls: 'win-set win-store', core: true, maxOnOpen: true,
@@ -4785,7 +4909,7 @@ const tourMark = (k = TOUR_KEY) => { try { localStorage.setItem(k, '1'); } catch
 const tv = x => (typeof x === 'function' ? x() : x);
 const TOUR_STEPS = [
   { target: () => $('.dicon[data-app="rr"]'), side: 'right', title: 'Welcome to Resonance Rift OS', text: 'A tiny pastel desktop for swapping songs with strangers. The main app is this icon. Want a one-minute tour? You can skip it any time and replay it later from Start > Take the tour.', next: 'Start the tour' },
-  { target: () => tourUnion('.dicon'), side: 'right', title: 'Your apps', text: 'Apps live here. Double-click an icon (or tap it on a phone) to open it, and drag icons to rearrange them. Notepad is for letters, Settings changes your wallpaper and colours, and the App Store has games.' },
+  { target: () => tourUnion('.dicon'), side: 'right', title: 'Your apps', text: 'Apps live here. Double-click an icon (or tap it on a phone) to open it, and drag icons to rearrange them. Right-click an icon (or press and hold on a phone) to remove it from the desktop. File Explorer brings it back. Notepad is for letters, Settings changes your wallpaper and colours, and the App Store has games.' },
   { target: () => $('#startBtn'), title: 'Start menu', text: 'Every app is here too, plus the day and night switch and this tour whenever you want it again.' },
   { target: () => $('#task .tray'), title: 'Taskbar tray', text: 'Switch between day and night, jump to your inbox and check the time. Open windows appear as buttons beside Start.' },
   { target: () => $('.dicon[data-app="rr"]'), side: 'right', title: 'Open Resonance Rift', text: 'Now the main app. Double-click this icon (tap it on a phone) to open it.', waitOpen: 'rr', helper: 'Open it for me' },
@@ -5273,7 +5397,7 @@ function osInit() {
       b.style.left = Math.max(0, Math.min(D.clientWidth - b.offsetWidth, x)) + 'px'; b.style.top = Math.max(0, Math.min(D.clientHeight - b.offsetHeight, y)) + 'px';
     });
   };
-  iconsRefresh = () => { icons.innerHTML = Object.entries(OS.apps).filter(([k]) => appInstalled(k)).map(([k, a]) => `<button type="button" class="dicon" data-app="${k}"><img alt="" src="${ICO[a.icon]}"><span>${esc(a.label)}</span></button>`).join(''); iconsLayout(); };
+  iconsRefresh = () => { const hid = iconsHidden(); icons.innerHTML = Object.entries(OS.apps).filter(([k]) => appInstalled(k) && !hid.includes(k)).map(([k, a]) => `<button type="button" class="dicon" data-app="${k}"><img alt="" src="${ICO[a.icon]}"><span>${esc(a.label)}</span></button>`).join(''); iconsLayout(); };
   iconsRefresh(); window.addEventListener('resize', iconsLayout);
   let dragged = false;
   icons.addEventListener('pointerdown', e => {
@@ -5304,6 +5428,30 @@ function osInit() {
     if (e.detail === 0 || e.pointerType === 'touch' || isPhone()) osLaunch(b.dataset.app);
   });
   icons.addEventListener('dblclick', e => { const b = e.target.closest('.dicon'); if (b) osLaunch(b.dataset.app); });
+  // remove from the desktop: right-click menu, Delete key, or press and hold on a touch screen
+  const dctxClose = () => { document.getElementById('dctx')?.remove(); document.removeEventListener('pointerdown', dctxAway, true); document.removeEventListener('keydown', dctxKey, true); };
+  const dctxAway = e => { if (!e.target.closest('#dctx')) dctxClose(); };
+  const dctxKey = e => { if (e.key === 'Escape') { e.preventDefault(); dctxClose(); } };
+  const dctxOpen = (b, x, y) => {
+    dctxClose(); const k = b.dataset.app, a = OS.apps[k]; if (!a) return;
+    icons.querySelectorAll('.dicon').forEach(i => i.classList.toggle('sel', i === b));
+    const m = document.createElement('div'); m.id = 'dctx'; m.className = 'dctx'; m.setAttribute('role', 'menu'); m.setAttribute('aria-label', a.label);
+    m.innerHTML = '<button type="button" role="menuitem" data-c="open">Open</button><button type="button" role="menuitem" data-c="hide">Remove from desktop</button>' + (a.store ? '<button type="button" role="menuitem" data-c="un">Uninstall</button>' : '');
+    document.body.append(m);
+    m.style.left = Math.max(4, Math.min(innerWidth - m.offsetWidth - 4, x)) + 'px'; m.style.top = Math.max(4, Math.min(innerHeight - m.offsetHeight - 4, y)) + 'px';
+    m.onclick = e => { const c = e.target.closest('[data-c]'); if (!c) return; dctxClose(); if (c.dataset.c === 'open') osLaunch(k); else if (c.dataset.c === 'hide') iconHide(k); else appRemove(k); };
+    document.addEventListener('pointerdown', dctxAway, true); document.addEventListener('keydown', dctxKey, true);
+    m.querySelector('button').focus();
+  };
+  icons.addEventListener('contextmenu', e => { const b = e.target.closest('.dicon'); if (!b) return; e.preventDefault(); dctxOpen(b, e.clientX, e.clientY); });
+  icons.addEventListener('keydown', e => { const b = e.target.closest('.dicon'); if (b && e.key === 'Delete') { e.preventDefault(); iconHide(b.dataset.app); } });
+  icons.addEventListener('pointerdown', e => {
+    const b = e.target.closest('.dicon'); if (!b || e.pointerType !== 'touch') return;
+    const sx = e.clientX, sy = e.clientY;
+    const t = setTimeout(() => { cancel({ type: 'x' }); dragged = true; setTimeout(() => { dragged = false; }, 600); dctxOpen(b, sx, sy); }, 550);
+    const cancel = ev => { if (ev.type === 'pointermove' && Math.hypot(ev.clientX - sx, ev.clientY - sy) < 8) return; clearTimeout(t); window.removeEventListener('pointermove', cancel); window.removeEventListener('pointerup', cancel); window.removeEventListener('pointercancel', cancel); };
+    window.addEventListener('pointermove', cancel); window.addEventListener('pointerup', cancel); window.addEventListener('pointercancel', cancel);
+  });
   deskEl().addEventListener('pointerdown', e => { if (!e.target.closest('.dicon')) icons.querySelectorAll('.dicon').forEach(x => x.classList.remove('sel')); });
   document.getElementById('startBtn').onclick = e => { e.stopPropagation(); startMenu(); };
   document.getElementById('start').addEventListener('click', e => {
