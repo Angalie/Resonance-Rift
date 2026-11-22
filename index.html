@@ -404,6 +404,58 @@ legend{font-weight:600;font-size:.9rem;margin:18px 0 9px;padding:0}
 .pp-embed-box iframe{width:100%;height:152px;border:3px solid var(--pkd);margin-top:8px;background:#000000;display:block}
 .pp-embed-box.yt iframe{height:auto;aspect-ratio:16/9}
 .pp-embed-note{font-size:.72rem;margin-top:6px;opacity:.8}
+/* Winamp-style player: rosy brushed-metal skin, dark LCD, spectrum bars, round transport buttons */
+.pp.wa{--wk:#4a3a3d;--wl:#f4e3e3;--wm:#e3c3c6;--wd:#c99fa5;padding:0;background:linear-gradient(180deg,var(--wl),var(--wm) 55%,var(--wd));border:3px solid #6e5156;border-radius:8px;box-shadow:5px 5px 0 rgba(60,35,45,.35),inset 0 0 0 2px #fbefef;max-width:360px;color:#4a3a3d;overflow:hidden}
+.pp.wa .wa-tb{display:flex;align-items:center;gap:7px;padding:3px 6px;background:linear-gradient(180deg,#ecd0d2,#c99ca3);border-bottom:2px solid #7a5b60;font:700 11px/1 Arial,Helvetica,sans-serif;letter-spacing:.14em;color:#fff7f7;text-shadow:1px 1px 0 #7a5558}
+.pp.wa .wa-gem{width:11px;height:11px;background:linear-gradient(135deg,#fff 0,#f7a3b8 45%,#b4506e);border:1px solid #6e3b4c;border-radius:3px;flex:none}
+.pp.wa .wa-grip{flex:1;height:7px;border-top:2px solid #fbeeee;border-bottom:2px solid #8e6a70;opacity:.9}
+.pp.wa .wa-wb{display:flex;gap:3px;flex:none}
+.pp.wa .wa-wb i{width:14px;height:12px;display:grid;place-items:center;font:700 9px/1 Arial,sans-serif;font-style:normal;color:#5a3f45;background:linear-gradient(180deg,#fdf4f4,#d6b3b7);border:1px solid #7a5b60;text-shadow:none}
+.pp.wa .wa-menu{display:flex;gap:12px;padding:3px 8px;font:400 12px/1.2 Arial,Helvetica,sans-serif;color:#4a3a3d;background:linear-gradient(180deg,#f8ecec,#ead0d2);border-bottom:1px solid #b78d93}
+.pp.wa .wa-main{padding:8px 8px 10px}
+.pp.wa .wa-lcd{background:linear-gradient(180deg,#403437,#2e2527);border:3px solid #7a5b60;border-radius:8px;padding:6px 8px 5px;box-shadow:inset 0 2px 6px rgba(0,0,0,.6),0 1px 0 #fbefef}
+.pp.wa .wa-lcd-top{display:flex;align-items:center;gap:8px;min-width:0}
+.pp.wa .wa-ind{font-size:9px;color:#f3d3d6;opacity:.9}
+.pp.wa .wa-time{font:400 22px/1 var(--f-pixel);color:#f8e8e8;letter-spacing:.05em;text-shadow:0 0 6px rgba(255,190,200,.45);flex:none}
+.pp.wa .wa-info{display:flex;flex-direction:column;gap:2px;font:700 7px/1 Arial,sans-serif;letter-spacing:.06em;color:#d7b7ba;min-width:0}
+.pp.wa .wa-info span{display:flex;gap:4px;align-items:center;white-space:nowrap}
+.pp.wa .wa-info em{font-style:normal}
+.pp.wa .wa-info u{text-decoration:none;background:#f2e2e2;color:#3a2c2e;padding:0 3px;border-radius:2px}
+.pp.wa .wa-st,.pp.wa .wa-src{background:#f2e2e2;color:#3a2c2e;padding:1px 4px;border-radius:2px;display:inline-block;max-width:92px;overflow:hidden;text-overflow:ellipsis}
+.pp.wa .wa-src{background:none;color:#e6b7c0;padding:0}
+.pp.wa .wa-spec{margin-left:auto;display:flex;align-items:flex-end;gap:2px;height:34px;width:62px;flex:none;padding:2px;border:1px solid #6e5156;background:#352a2d}
+.pp.wa .wa-spec i{flex:1;height:var(--h);background:linear-gradient(180deg,#ffd9de,#f08aa0 60%,#b45a74);min-width:2px}
+.pp.wa.playing .wa-spec i{animation:waBar .7s ease-in-out infinite alternate;animation-delay:var(--d)}
+@keyframes waBar{0%{height:18%}100%{height:92%}}
+.pp.wa .wa-marq{margin-top:6px;overflow:hidden;white-space:nowrap;background:#352a2d;border-top:1px solid #1f1719;padding:3px 0;font:400 11px/1.2 var(--f-pixel);letter-spacing:.06em;color:#9b8083;text-transform:uppercase}
+.pp.wa .wa-run{display:inline-block;animation:waMarq 16s linear infinite}
+@keyframes waMarq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.pp.wa .wa-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.pp.wa .wa-seek{height:12px;margin:9px 2px 8px;border:2px solid #8e6a70;border-radius:6px;background:linear-gradient(180deg,#bd949a,#e8cdd0);position:relative}
+.pp.wa .wa-seek b{position:absolute;left:12%;top:-5px;width:28px;height:15px;border:2px solid #7a5b60;border-radius:8px;background:linear-gradient(180deg,#fdf1f1,#cba3a9);box-shadow:0 1px 0 #fff inset}
+.pp.playing.wa .wa-seek b{animation:waSeek 32s linear infinite}
+@keyframes waSeek{from{left:2%}to{left:calc(100% - 30px)}}
+.pp.wa .wa-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.pp.wa .wa-btns{display:flex;gap:6px}
+.pp.wa .wa-b{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:400 10px/1 var(--f-pixel);color:#5a3f45;background:radial-gradient(circle at 35% 28%,#fff8f8,#e9cdd0 55%,#c49aa1);border:2px solid #7a5b60;box-shadow:0 2px 0 rgba(255,255,255,.55) inset,0 2px 2px rgba(60,35,45,.35);text-decoration:none;flex:none}
+.pp.wa .wa-b.play{color:#c4455f;font-size:13px;cursor:pointer;background:radial-gradient(circle at 35% 28%,#fff,#f7d3da 55%,#dd9aa8)}
+.pp.wa .wa-b.play:hover{filter:brightness(1.05)}
+.pp.wa .wa-b.play:active{transform:translateY(1px)}
+.pp.wa .wa-b.off{opacity:.5;cursor:not-allowed}
+.pp.wa .wa-vol{display:flex;align-items:center;gap:6px;min-width:0;flex:1;justify-content:flex-end}
+.pp.wa .wa-spk{font-size:12px;filter:grayscale(1) brightness(.6)}
+.pp.wa .wa-vt{flex:1;max-width:96px;height:8px;border:2px solid #8e6a70;border-radius:5px;background:linear-gradient(180deg,#bd949a,#e8cdd0);position:relative}
+.pp.wa .wa-vt b{position:absolute;right:18%;top:-6px;width:20px;height:14px;border:2px solid #7a5b60;border-radius:7px;background:linear-gradient(180deg,#fdf1f1,#cba3a9)}
+.pp.wa .pp-foot{margin:0;padding:6px 8px 8px;background:linear-gradient(180deg,#e3c3c6,#cfa6ac);border-top:2px solid #b78d93}
+.pp.wa .pp-tag{background:#4a3a3d;color:#f3d8dc;border-radius:3px}
+.pp.wa .pp-embed{margin:0;padding:0 8px 8px;color:#4a3a3d}
+.pp.wa .pp-embed summary{color:#4a3a3d}
+.pp.wa.compact{max-width:none;box-shadow:3px 3px 0 rgba(60,35,45,.35)}
+.pp.wa.compact .wa-menu,.pp.wa.compact .wa-vol{display:none}
+.pp.wa.compact .wa-time{font-size:15px}
+.pp.wa.compact .wa-b{width:26px;height:26px;font-size:8px}
+.pp.wa.compact .wa-spec{height:26px;width:46px}
+@media (prefers-reduced-motion:reduce){.pp.wa .wa-run{animation:none!important;transform:none!important}.pp.wa.playing .wa-spec i,.pp.playing.wa .wa-seek b{animation:none!important}}
 .pp.compact{padding:10px;max-width:none;box-shadow:4px 4px 0 rgba(0,0,0,.45),inset 0 0 0 2px #fee6eb}
 .pp.compact .cd{width:48px;height:48px}
 .pp.compact .cd span{font-size:10px}
@@ -2699,21 +2751,29 @@ function playerCard(song, { tag = 'MYSTERY', title, compact = false, embed = tru
   const artist = title == null && song?.title ? (song.artist || '') : '';
   const src = link ? serviceName(link.kind).toUpperCase() : 'NO SIGNAL';
   const mys = tag === 'MYSTERY';
-  return `<div class="pp${compact ? ' compact' : ''}">
-    <div class="pp-screen">
-      <div class="pp-status"><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="heart" aria-hidden="true">♥</span><span class="batt" aria-hidden="true"><i></i></span></div>
-      <div class="pp-now">♫ NOW PLAYING ♫</div>
-      <div class="pp-title">${esc(t || '...')}</div>
-      ${artist ? `<div class="pp-artist">${esc(artist)}</div>` : ''}
-      <div class="pp-prog" aria-hidden="true"><b></b></div>
-      <div class="pp-times"><span>0:00</span><span>${src}</span></div>
-    </div>
-    <div class="pp-body">
-      <div class="cd" aria-hidden="true"><span>💖</span></div>
-      <div class="pp-ctrls">
-        <span class="pbtn" aria-hidden="true">◀◀</span>
-        ${link ? `<a class="pbtn play" data-play href="${esc(link.url)}" target="_blank" rel="noopener noreferrer" aria-label="Play on ${serviceName(link.kind)} (opens a new tab)">▶</a>` : `<span class="pbtn play off" aria-label="No valid link">▶</span>`}
-        <span class="pbtn" aria-hidden="true">▶▶</span>
+  const line = (t || '...') + (artist ? ' - ' + artist : '');
+  const bars = Array.from({ length: 15 }, (_, i) => `<i style="--h:${[34, 52, 46, 70, 58, 40, 82, 64, 48, 76, 54, 38, 66, 44, 30][i]}%;--d:${(i % 5) * 0.13 + 0.05}s"></i>`).join('');
+  return `<div class="pp wa${compact ? ' compact' : ''}">
+    <div class="wa-tb" aria-hidden="true"><i class="wa-gem"></i><span class="wa-grip"></span><b>RIFTAMP</b><span class="wa-grip"></span><span class="wa-wb"><i>_</i><i>▢</i><i>✕</i></span></div>
+    <div class="wa-menu" aria-hidden="true"><span>File</span><span>Play</span><span>Options</span><span>View</span><span>Help</span></div>
+    <div class="wa-main">
+      <div class="wa-lcd">
+        <div class="wa-lcd-top">
+          <span class="wa-ind" aria-hidden="true">▶</span>
+          <b class="wa-time" aria-hidden="true">0:00</b>
+          <div class="wa-info" aria-hidden="true"><span><em>KBPS</em><u>128</u></span><span><em>KHZ</em><u>44</u></span><span class="wa-st">STEREO</span><span class="wa-src">${esc(src)}</span></div>
+          <div class="wa-spec" aria-hidden="true">${bars}</div>
+        </div>
+        <div class="wa-marq" title="${esc(line)}"><span class="wa-sr">${esc(line)}</span><span class="wa-run" aria-hidden="true">${esc(line)}  ***  ${esc(line)}  ***  </span></div>
+      </div>
+      <div class="wa-seek" aria-hidden="true"><b></b></div>
+      <div class="wa-row">
+        <div class="wa-btns">
+          <span class="wa-b" aria-hidden="true">◀◀</span>
+          ${link ? `<a class="wa-b play" data-play href="${esc(link.url)}" target="_blank" rel="noopener noreferrer" aria-label="Play on ${serviceName(link.kind)} (opens a new tab)">▶</a>` : `<span class="wa-b play off" aria-label="No valid link">▶</span>`}
+          <span class="wa-b" aria-hidden="true">❚❚</span><span class="wa-b" aria-hidden="true">■</span><span class="wa-b" aria-hidden="true">▶▶</span>
+        </div>
+        <div class="wa-vol" aria-hidden="true"><span class="wa-spk">🔈</span><span class="wa-vt"><b></b></span></div>
       </div>
     </div>
     <div class="pp-foot"><span class="pp-tag${mys ? ' mys' : ''}">PLAYLIST: ${esc(tag)}</span></div>
