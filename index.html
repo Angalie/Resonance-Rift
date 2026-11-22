@@ -1226,6 +1226,45 @@ html[data-tone="light"] .dicon.sel{border-color:#521f66}
 #offerForm .oc-bar .err{flex:1;min-width:0;margin:0;padding:8px 12px;background:#ece3ef;border:3px solid #9b8a98;border-radius:8px;color:#b0304a;font:500 .85rem/1.3 var(--f-body)}
 #offerForm .oc-bar .err:empty::before{content:"ready when you are…";color:#915fa5;font:400 .8rem var(--f-pixel)}
 #offerForm .oc-bar .btn.primary{flex:none;border:3px solid #492a55;border-radius:10px;background:#f46885;color:#ffffff;box-shadow:inset 2px 2px 0 rgba(255,255,255,.35),2px 2px 0 rgba(73,42,85,.35);font:400 .8rem/1.2 var(--f-pixel);padding:9px 16px}
+/* submit.exe, storybook look: pink frame with hearts, lavender title bar with three dots, cream grid page, pale-blue caption strip */
+#offerForm{background:#ddd0ee;border:4px solid #cbbcf0;border-radius:14px;box-shadow:inset 0 0 0 3px #cdbfe6,inset 0 0 0 5px #b9cde2,5px 5px 0 rgba(75,61,126,.25);padding:16px 16px 12px;padding-top:62px;color:#7d4fa6}
+#offerForm::before{content:"[ submit.exe – add a song ]";left:16px;right:16px;top:20px;height:38px;padding:0 12px 0 92px;background:radial-gradient(circle at 22px 50%,#f7a8cf 0 7px,#4b3d7e 7px 9.5px,transparent 10px),radial-gradient(circle at 48px 50%,#f9d77a 0 7px,#4b3d7e 7px 9.5px,transparent 10px),radial-gradient(circle at 74px 50%,#9fb6f2 0 7px,#4b3d7e 7px 9.5px,transparent 10px),#d9ccf6;border:4px solid #4b3d7e;border-bottom:0;border-radius:8px 8px 0 0;font:400 .78rem/30px var(--f-pixel);color:#9b7ccf;letter-spacing:.04em;text-transform:none}
+#offerForm::after{display:none}
+#offerForm .oc-info{margin:0;padding:8px 12px;background:#e8e1f5;border:4px solid #4b3d7e;border-top:0;border-bottom:2px dashed #cdbbea;border-radius:0;box-shadow:none;color:#8f5bb5}
+#offerForm .oc-info .tag{background:#f6f2fc;color:#7d4fa6;border:2px solid #4b3d7e}
+#offerForm .oc-chat{margin:0;padding:16px 14px;border:4px solid #4b3d7e;border-top:0;border-bottom:0;border-radius:0;background:linear-gradient(rgba(150,130,205,.22) 1px,transparent 1px) 0 0/16px 16px,linear-gradient(90deg,rgba(150,130,205,.22) 1px,transparent 1px) 0 0/16px 16px,#e3dbf3}
+#offerForm .oc-bub{background:#eee8f8;border:3px solid #b9a4e6;box-shadow:none}
+#offerForm .oc-bub{padding-top:5px}
+#offerForm .oc-bub label{margin-top:0}
+#offerForm .oc-bub::before{top:14px}
+#offerForm .oc-bub::before{background:#eee8f8;border-left:3px solid #b9a4e6;border-bottom:3px solid #b9a4e6}
+#offerForm .oc-bub label,#offerForm .oc-bub legend{color:#8f4fb0}
+#offerForm .oc-bub .hint{color:#9a82b8}
+#offerForm .oc-bub input[type=url],#offerForm .oc-bub input[type=text],#offerForm .oc-bub select{border:3px solid #b9a4e6;background:#f6f2fc;color:#5a3a78}
+#offerForm .oc-av{filter:none}
+#offerForm .rte{border:3px solid #b9a4e6;background:#f6f2fc;color:#5a3a78}
+#offerForm .rte-bar{border-bottom:2px solid #ddd2ec}
+#offerForm .rte-bar button{color:#7d4fa6}
+#offerForm .rte-bar button:hover{background:#e9dff3}
+#offerForm .rte-bar button[aria-pressed="true"],#offerForm .rte-bar button[aria-expanded="true"]{background:#f9d6e6;border-color:#b9a4e6}
+#offerForm .rte-box{min-height:46px;color:#3d1c4a}
+#offerForm .rte-box:empty::before{color:#a592c0}
+#offerForm .emoji-pop{background:#eee8f8;border-color:#b9a4e6}
+#offerForm .oc-bar{margin:0;padding:8px 10px;background:#c4d3e6;border:4px solid #4b3d7e;border-radius:0 0 8px 8px;gap:10px}
+#offerForm .oc-bar .err{background:#dbe4f2;border:3px solid #8a98cc;color:#b0304a}
+#offerForm .oc-bar .err:empty::before{color:#5d6aa6}
+#offerForm .oc-bar .btn.primary{border:3px solid #4b3d7e}
+#offerForm .chip span{background:#e9dff3;color:#7d4fa6;border:3px solid #b9a4e6;box-shadow:none}
+#offerForm .chip input:checked+span{background:#e3a2c0;color:#fff;border-color:#4b3d7e}
+#offerForm .chip input:focus-visible+span{outline:3px dashed #4b3d7e;outline-offset:2px}
+#offerForm .oc-foot{margin:12px 0 2px;text-align:center;font:400 .66rem/1.3 var(--f-pixel);color:#a98cc9;letter-spacing:.06em}
+#offerForm .orn{position:absolute;font-style:normal;line-height:1;pointer-events:none;text-shadow:0 2px 0 rgba(120,70,130,.25)}
+#offerForm .orn.tl,#offerForm .orn.tr,#offerForm .orn.bl,#offerForm .orn.br{font-size:22px;color:#f77fa6}
+#offerForm .orn.tl{left:6px;top:-4px}#offerForm .orn.tr{right:6px;top:-4px}#offerForm .orn.bl{left:6px;bottom:-4px}#offerForm .orn.br{right:6px;bottom:-4px}
+#offerForm .orn.st1,#offerForm .orn.st2{font-size:15px;color:#8fb6ea}
+#offerForm .orn.st1{left:34px;top:0}#offerForm .orn.st2{right:34px;bottom:2px}
+#offerForm .orn.fl1,#offerForm .orn.fl2{font-size:17px;color:#fff;-webkit-text-stroke:1px #b9a4e6;top:46%}
+#offerForm .orn.fl1{left:-9px}#offerForm .orn.fl2{right:-9px}
 @media (max-width:700px){#offerForm .oc-av{display:none}#offerForm .oc-bub::before{display:none}#offerForm .oc-bar{flex-wrap:wrap}}
 /* pixel avatar + status screen (purple and pink) */
 /* File Explorer + desktop icon menu */
@@ -1521,6 +1560,12 @@ html[data-mode="night"] .taskbtn.on{background:rgba(255,255,255,.3)}
 #authErr{text-align:center;font-weight:800;font-size:.92rem;line-height:1.35;color:#b3263f;margin:6px 0}
 /* The Universe page */
 .hero .orb.logo{cursor:pointer}
+/* The Archive list */
+.ar-list{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:10px}
+.ar-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:12px 16px;background:var(--surf);color:var(--fg);border:3px solid var(--edge);border-radius:10px;box-shadow:0 3px 0 var(--edge)}
+.ar-main{display:flex;flex-direction:column;min-width:0;flex:1 1 220px}
+.ar-main b{overflow-wrap:anywhere}
+.ar-tags{display:flex;flex-wrap:wrap;gap:6px}
 html.popout #dicons,html.popout #stickies,html.popout #task,html.popout #start,html.popout #deskFrame,html.popout #rrWaves{display:none!important}
 html.popout .win:not(.closed){position:fixed!important;left:0!important;top:0!important;right:0!important;bottom:0!important;width:auto!important;height:auto!important;border-radius:0!important}
 html.popout .win .win-btn[data-w="min"],html.popout .win .win-btn[data-w="max"],html.popout .win .win-btn[data-w="pop"],html.popout .win .rh,html.popout .win .rz{display:none!important}
@@ -1905,6 +1950,7 @@ const NAME_RE = /^[\p{L}\p{N} '\-.]{2,24}$/u;
      put(col, id, doc)       → write whole doc
      patch(col, id, partial) → deep-merge into an existing doc
      listOpen()              → all songs with status 'open'
+     listAll()               → every song ever submitted (open or swapped)
      pair(songIdA, songIdB, pairDoc) → atomically claim two open songs; true/false
      sub(col, id, cb)        → live updates for one doc; returns unsubscribe()
      report(reportDoc)       → store a report
@@ -1948,6 +1994,7 @@ class LocalAdapter {
     deepMerge(m[id], clone(partial)); this._write(col, m); this._notify();
   }
   async listOpen() { return Object.values(this._read(SONGS)).filter(s => s.status === 'open').map(clone); }
+  async listAll() { return Object.values(this._read(SONGS)).map(clone); }
   /** Open tabs that sent a heartbeat since `since` (nothing about who they are is stored). */
   async countPresence(since) {
     const m = this._read('bs_presence'); let stale = false;
@@ -2000,7 +2047,7 @@ class LocalAdapter {
     const base = Date.now() - 86400000;
     SEEDS.forEach((s, i) => {
       const link = parseSongLink(s.url), id = 's_seed_' + i + '_' + Date.now().toString(36);
-      songs[id] = { id, owner: 'bot_' + String(i + 1).padStart(2, '0'), bot: true, kind: link.kind, url: link.url, title: s.title, artist: s.artist, note: s.note, mood: s.mood, displayName: s.name, status: 'open', createdAt: base + i * 60000 };
+      songs[id] = { id, owner: 'bot_' + String(i + 1).padStart(2, '0'), bot: true, kind: link.kind, url: link.url, title: s.title, artist: s.artist, note: s.note, mood: s.mood, cosmic: COSMIC_ALL[(i * 5 + 2) % COSMIC_ALL.length], displayName: s.name, status: 'open', createdAt: base + i * 60000 };
     });
     this._write(SONGS, songs);
     this._write('bs_meta', { ...this._read('bs_meta'), seeded: true });
@@ -2025,6 +2072,10 @@ class SharedAdapter {
   async countSongs() {
     const q = await this._retry(() => this.db.collection(SONGS).limit(5000).get());
     return q.docs.filter(d => !d.data().testFor).length;
+  }
+  async listAll() {
+    const q = await this._retry(() => this.db.collection(SONGS).limit(500).get());
+    return q.docs.map(d => clone(d.data()));
   }
   async listOpen() {
     const q = await this._retry(() => this.db.collection(SONGS).where('status', '==', 'open').limit(300).get());
@@ -2088,6 +2139,16 @@ const MOODS = [
   { k: 'focus', l: 'Focus', i: '🎧' }, { k: 'nostalgic', l: 'Nostalgic', i: '📼' },
 ];
 const moodOf = k => MOODS.find(m => m.k === k);
+/** Cosmic objects a song can be tagged with (shown as a small tag next to its label) */
+const COSMIC = [
+  ['Planets', ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto']],
+  ['Moons', ['The Moon', 'Europa', 'Titan', 'Io', 'Enceladus', 'Triton']],
+  ['Stars', ['The Sun', 'Sirius', 'Polaris', 'Betelgeuse', 'Vega', 'Proxima Centauri', 'Red giant', 'White dwarf', 'Neutron star', 'Pulsar', 'Supernova']],
+  ['Galaxies', ['Milky Way', 'Andromeda', 'Whirlpool galaxy', 'Sombrero galaxy', 'Triangulum', 'Magellanic Cloud']],
+  ['Nebulae and clusters', ['Orion Nebula', 'Crab Nebula', 'Pillars of Creation', 'Eagle Nebula', 'Pleiades', 'Star cluster']],
+  ['More', ['Black hole', 'Quasar', 'Comet', 'Asteroid', 'Meteor shower', 'Aurora', 'Eclipse', 'Constellation', 'Wormhole', 'Dark matter']],
+];
+const COSMIC_ALL = COSMIC.flatMap(g => g[1]);
 const REACTIONS = [
   { e: '🌙', l: 'Late-night feeling' }, { e: '🔥', l: 'Fire' }, { e: '💔', l: 'Heartbroken' },
   { e: '😌', l: 'Soothed' }, { e: '🤯', l: 'Mind blown' }, { e: '🥲', l: 'Happy-sad' },
@@ -2310,10 +2371,10 @@ async function commitUser() {
 }
 
 function songPublic(s) {
-  return { id: s.id, owner: s.owner, url: s.url, kind: s.kind, title: s.title || '', artist: s.artist || '', note: s.note, mood: s.mood, displayName: s.displayName };
+  return { id: s.id, owner: s.owner, url: s.url, kind: s.kind, title: s.title || '', artist: s.artist || '', note: s.note, noteRich: s.noteRich || null, mood: s.mood, cosmic: s.cosmic || '', displayName: s.displayName };
 }
 /** The sender's "why this one" line, shown under the card now that the card shows the song name. */
-const noteQuote = (song, label = 'Their note') => (song?.note && song?.title ? `<p class="note-q"><small>${label}</small>“${esc(song.note)}”</p>` : '');
+const noteQuote = (song, label = 'Their note') => (song?.note && song?.title ? `<p class="note-q"><small>${label}</small>“${richHTML({ rich: song.noteRich, comment: song.note })}”</p>` : '');
 function makePair(a, b) {
   return { id: uid('p_'), users: [a.owner, b.owner], songs: { [a.owner]: songPublic(a), [b.owner]: songPublic(b) }, createdAt: Date.now(),
     reactions: {}, thanks: {}, saved: {}, removed: {}, bot: a.bot ? a.owner : (b.bot ? b.owner : null) };
@@ -2332,10 +2393,10 @@ const daysLeft = o => Math.max(1, Math.ceil(((+o.at || 0) + OFFER_TTL - Date.now
 const offersToday = u => (u.offerDay?.date === todayUTC() ? u.offerDay.count : 0);
 
 /** A random open pool song in this mood: never mine, never one I already offered to, test strangers only for their creator. */
-async function pullSong(mood) {
+async function pullSong(mood, cosmic) {
   const [open, out] = await Promise.all([S.store.listOpen(), S.store.listWhere(OFFERS, 'from', '==', me())]);
   const tried = new Set(out.map(o => o.targetSongId));
-  let pool = open.filter(s => s.mood === mood && s.owner !== me() && (!s.testFor || s.testFor === me()) && !tried.has(s.id) && parseSongLink(s.url));
+  let pool = open.filter(s => s.mood === mood && (!cosmic || s.cosmic === cosmic) && s.owner !== me() && (!s.testFor || s.testFor === me()) && !tried.has(s.id) && parseSongLink(s.url));
   const fresh = pool.filter(s => !S.find.seen.has(s.id));
   if (fresh.length) pool = fresh; else S.find.seen.clear();   // seen them all: start the loop again
   return { song: pool.length ? pick(pool) : null, total: pool.length };
@@ -2530,7 +2591,7 @@ async function submitSong() {
   if (!link) throw new Error('That link is not from a supported music site.');
   if (!moodOf(d.mood)) throw new Error('Pick the mood that fits before you submit.');
   if (todayCount(u) >= DAILY_MAX) throw new Error(`You've submitted all ${DAILY_MAX} songs for today.`);
-  const song = { id: uid('s_'), owner: u.username, kind: link.kind, url: link.url, title: d.title.trim(), artist: d.artist.trim(), note: d.note.trim(), mood: d.mood, displayName: u.username, status: 'open', createdAt: Date.now() };
+  const song = { id: uid('s_'), owner: u.username, kind: link.kind, url: link.url, title: d.title.trim(), artist: d.artist.trim(), note: d.note.trim(), noteRich: Array.isArray(d.noteRich) && d.noteRich.some(x => x[1]) ? d.noteRich.map(x => [String(x[0]).slice(0, 90), x[1] | 0]).slice(0, 30) : null, mood: d.mood, cosmic: COSMIC_ALL.includes(d.cosmic) ? d.cosmic : '', displayName: u.username, status: 'open', createdAt: Date.now() };
   await S.store.put(SONGS, song.id, song);
   const t = todayUTC(); if (u.day?.date !== t) u.day = { date: t, count: 0 };
   u.day.count++; u.stats.submitted++;
@@ -2660,6 +2721,7 @@ function playerCard(song, { tag = 'MYSTERY', title, compact = false, embed = tru
   </div>`;
 }
 const moodTag = k => (moodOf(k)?.l || 'Unknown').toUpperCase();
+const songTag = s => moodTag(s?.mood) + (s?.cosmic ? ' · ' + String(s.cosmic).toUpperCase() : '');
 /** The glossy bubble with the Resonance Rift emblem inside (home hero). Other orbs stay as the hidden-person "?" bubble. */
 const orbLogo = (size = 190) => `<div class="orb logo" style="--s:${size}px" role="link" tabindex="0" aria-label="Explore The Universe" title="Explore The Universe"><canvas class="orb-lotus" width="380" height="380" aria-hidden="true"></canvas><img class="orb-img" src="${LOGO_FULL}" alt="" width="${size}" height="${size}"><span class="gloss"></span></div>`;
 /* translucent lotus blossoms that slowly open and close around the home orb (same look as the desktop "Lotus" effect) */
@@ -3075,57 +3137,138 @@ function renderOffer() {
           <p class="hint" id="metaHint">Shown on the player so they know what they're about to hear.</p>
         </div></div>
         <div class="oc-row"><img class="oc-av" alt="" src="${ICO.envelope}"><div class="oc-bub">
-          <label for="f-note"><span>Why this one?</span><span class="ctr" id="noteCtr">${d.note.length}/90</span></label>
-          <input type="text" id="f-note" maxlength="90" placeholder="The bridge at 2:10 lives in my head rent-free" value="${esc(d.note)}">
+          <label id="nLbl"><span>Why this one?</span><span class="ctr" id="noteCtr">${d.note.length}/90</span></label>
+          <div class="rte">
+            <div class="rte-bar" role="toolbar" aria-label="Formatting">
+              <button type="button" data-cmd="bold" aria-pressed="false" aria-label="Bold" title="Bold (Ctrl+B)"><b>B</b></button>
+              <button type="button" data-cmd="italic" aria-pressed="false" aria-label="Italic" title="Italic (Ctrl+I)"><i>I</i></button>
+              <button type="button" data-cmd="underline" aria-pressed="false" aria-label="Underline" title="Underline (Ctrl+U)"><u>U</u></button>
+              <button type="button" data-cmd="strikeThrough" aria-pressed="false" aria-label="Strikethrough" title="Strikethrough"><s>S</s></button>
+              <span class="rte-sep" aria-hidden="true"></span>
+              <button type="button" id="emojiBtn" aria-expanded="false" aria-controls="emojiPop" aria-label="Insert emoji" title="Insert emoji">😊</button>
+            </div>
+            <div class="rte-box" id="f-note" contenteditable="true" role="textbox" aria-multiline="false" aria-labelledby="nLbl" data-ph="The bridge at 2:10 lives in my head rent-free"></div>
+            <div class="emoji-pop" id="emojiPop" hidden>${PICK_EMOJI.map(e => `<button type="button" data-ins="${e}" aria-label="Insert ${e}">${e}</button>`).join('')}</div>
+          </div>
         </div></div>
         <div class="oc-row"><img class="oc-av" alt="" src="${ICO.star}"><div class="oc-bub">
-          <fieldset><legend>Mood</legend><div class="chips">
-            ${MOODS.map(m => `<label class="chip" style="margin:0;font-weight:500"><input type="radio" name="mood" value="${m.k}"${d.mood === m.k ? ' checked' : ''}><span>${m.i} ${m.l}</span></label>`).join('')}
-          </div></fieldset>
+          <div class="two">
+            <div><label for="f-label"><span>Label</span></label><select id="f-label"><option value="">Choose one</option>${MOODS.map(m => `<option value="${m.k}"${d.mood === m.k ? ' selected' : ''}>${m.l}</option>`).join('')}</select></div>
+            <div><label for="f-cosmic"><span>Cosmic Object</span></label><select id="f-cosmic"><option value="">Choose one</option>${COSMIC.map(([g, list]) => `<optgroup label="${g}">${list.map(o => `<option${d.cosmic === o ? ' selected' : ''}>${o}</option>`).join('')}</optgroup>`).join('')}</select></div>
+          </div>
         </div></div>
       </div>
       <div class="oc-bar"><p class="err" id="offerErr" role="alert"></p><button class="btn primary" type="submit">Add to the pool</button></div>
+      <p class="oc-foot" aria-hidden="true">— ✦ — add a song to the pool · page 1/1 — ✦ —</p>
+      <i class="orn tl" aria-hidden="true">♥</i><i class="orn tr" aria-hidden="true">♥</i><i class="orn bl" aria-hidden="true">♥</i><i class="orn br" aria-hidden="true">♥</i>
+      <i class="orn st1" aria-hidden="true">✦</i><i class="orn st2" aria-hidden="true">✦</i><i class="orn fl1" aria-hidden="true">❀</i><i class="orn fl2" aria-hidden="true">❀</i>
     </form>
     <aside class="stack"><p class="eyebrow">What a stranger sees when they pull it</p><div id="offerPreview"></div>
       <p class="hint">Strangers pull songs by mood, so the mood you pick decides who can find yours.</p></aside>
   </div>`;
   const link = $('#f-link'), note = $('#f-note'), hint = $('#linkHint'), ti = $('#f-title'), ar = $('#f-artist');
+  const ne = initRichEditor(note, 90, '#noteCtr');
+  note.innerHTML = d.note ? richHTML({ rich: d.noteRich, comment: d.note }) : '';
   let looked = '';
-  /* Best effort: fill name/artist from the platform's public oEmbed endpoint (no key needed).
-     Hosts that block outside requests (e.g. the claude.ai artifact) simply skip this. */
-  const autofill = async p => {
-    if (!p || looked === p.url || (ti.value.trim() && ar.value.trim())) return;
-    looked = p.url;
-    if (p.kind !== 'spotify' && p.kind !== 'youtube') return;   // only these two offer a public lookup
-    const ep = p.kind === 'spotify' ? `https://open.spotify.com/oembed?url=${encodeURIComponent(p.url)}` : `https://www.youtube.com/oembed?format=json&url=${encodeURIComponent(p.url)}`;
+  /* Fill the song name and artist from the link itself (public lookups, no key): YouTube, SoundCloud and anything noembed knows give both;
+     Apple Music is read through the iTunes lookup; Spotify only shares the name, so the artist is matched through iTunes and flagged to double-check.
+     Anything that fails (offline, blocked host) just leaves the boxes for the person to type. */
+  /* typed boxes are the person's: they are never overwritten. Anything else is cleared and refilled when the link changes (kept in the draft so it survives the page redrawing). */
+  ti.addEventListener('input', () => { d.tTitle = !!ti.value.trim(); });
+  ar.addEventListener('input', () => { d.tArtist = !!ar.value.trim(); });
+  const getJSON = async url => { const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 4500); try { const r = await fetch(url, { signal: ctl.signal }); if (!r.ok) throw new Error(r.status); return await r.json(); } finally { clearTimeout(t); } };
+  const cleanTitle = (s, by) => {
+    let name = String(s || '').replace(/\s*[([][^)\]]*(official|video|audio|lyric|visuali[sz]er|hd|4k|remaster|music video)[^)\]]*[)\]]/gi, '').trim();
+    const dash = name.match(/^(.+?)\s+[-–—]\s+(.+)$/);   // "Artist - Title" (YouTube style)
+    if (dash && by && dash[1].toLowerCase().includes(by.toLowerCase())) name = dash[2];
+    return name.slice(0, 80);
+  };
+  /* MusicBrainz knows the streaming links of most released songs: link -> recording -> artist credit (free, keyless, allows browser requests) */
+  const mbLookup = async url => {
+    const j = await getJSON('https://musicbrainz.org/ws/2/url?fmt=json&inc=recording-rels&resource=' + encodeURIComponent(url));
+    const id = ((j.relations || []).find(x => x.recording) || {}).recording?.id;
+    if (!id) return null;
+    await new Promise(r => setTimeout(r, 1150));   // MusicBrainz allows about one request a second
+    let rec; try { rec = await getJSON('https://musicbrainz.org/ws/2/recording/' + id + '?fmt=json&inc=artist-credits'); } catch { await new Promise(r => setTimeout(r, 1300)); rec = await getJSON('https://musicbrainz.org/ws/2/recording/' + id + '?fmt=json&inc=artist-credits'); }
+    const artist = (rec['artist-credit'] || []).map(a => (a.name || '') + (a.joinphrase || '')).join('').trim().slice(0, 60);
+    return rec.title ? { title: String(rec.title).slice(0, 80), artist } : null;
+  };
+  const cleanBy = s => String(s || '').replace(/\s*(- Topic|VEVO|Official)$/i, '').trim().slice(0, 60);
+  const lookup = async p => {
+    if (p.kind === 'youtube') { const j = await getJSON('https://www.youtube.com/oembed?format=json&url=' + encodeURIComponent(p.url)); const by = cleanBy(j.author_name); return { title: cleanTitle(j.title, by), artist: by }; }
+    if (p.kind === 'soundcloud') { const j = await getJSON('https://soundcloud.com/oembed?format=json&url=' + encodeURIComponent(p.url)); const by = cleanBy(j.author_name); return { title: String(j.title || '').replace(/\s+by\s+.+$/i, '').slice(0, 80), artist: by }; }
+    if (p.kind === 'apple') {
+      const q = (() => { try { return new URL(p.url); } catch { return null; } })();
+      const id = (q && q.searchParams.get('i')) || (p.url.match(/\/(\d{5,})(?:\?|$)/) || [])[1];
+      if (!id) throw new Error('no id');
+      const j = await getJSON('https://itunes.apple.com/lookup?id=' + id + '&entity=song'), r = (j.results || [])[0];
+      if (!r) throw new Error('none');
+      return { title: String(r.trackName || r.collectionName || '').slice(0, 80), artist: cleanBy(r.artistName) };
+    }
+    if (p.kind === 'spotify') {
+      let title = '', artist = '', guess = false;
+      try { const j = await getJSON('https://open.spotify.com/oembed?url=' + encodeURIComponent(p.url)); title = String(j.title || '').slice(0, 80); } catch { /* try the next source */ }
+      if (p.type === 'track') { try { const m = await mbLookup(p.url); if (m) { artist = m.artist; if (!title) title = m.title; } } catch { /* try the next source */ } }
+      if (!artist && title && p.type === 'track') {   // last resort: match the exact title on iTunes, only when every song with that name has the same artist (covers make it ambiguous)
+        try { const k = await getJSON('https://itunes.apple.com/search?entity=song&limit=30&term=' + encodeURIComponent(title)); const names = [...new Set((k.results || []).filter(x => String(x.trackName || '').toLowerCase() === title.toLowerCase()).map(x => cleanBy(x.artistName)))]; if (names.length === 1) { artist = names[0]; guess = true; } } catch { /* leave it blank */ }
+      }
+      if (!title && !artist) throw new Error('none');
+      return { title, artist, guess };
+    }
+    try { const j = await getJSON('https://noembed.com/embed?url=' + encodeURIComponent(p.url)); if (!j.error && j.title) { const by = cleanBy(j.author_name); return { title: cleanTitle(j.title, by), artist: by }; } } catch { /* try MusicBrainz */ }
+    const m = await mbLookup(p.url); if (!m) throw new Error('none');
+    return m;
+  };
+  /* With no network at all (or a blocked page), SoundCloud, Bandcamp and Apple Music links still carry the names in the address itself. */
+  const nice = s => { let t = s; try { t = decodeURIComponent(s); } catch {} return t.replace(/[-_+]+/g, ' ').replace(/\s+/g, ' ').trim().replace(/(^|\s)([a-z])/g, (m, a, b) => a + b.toUpperCase()).slice(0, 80); };
+  const slugGuess = p => {
     try {
-      const ctl = new AbortController(); setTimeout(() => ctl.abort(), 3500);
-      const j = await (await fetch(ep, { signal: ctl.signal })).json();
+      const u = new URL(p.url), parts = u.pathname.split('/').filter(Boolean);
+      if (p.kind === 'soundcloud' && parts.length >= 2 && !/^(sets|albums)$/.test(parts[1])) return { title: nice(parts[1]), artist: nice(parts[0]) };
+      if (p.kind === 'bandcamp' && /^(track|album)$/.test(parts[0] || '') && parts[1]) return { title: nice(parts[1]), artist: nice(u.hostname.split('.')[0]) };
+      if (p.kind === 'apple') { const i = parts.indexOf('song'), a = parts.indexOf('album'); if (i >= 0 && parts[i + 1]) return { title: nice(parts[i + 1]), artist: '' }; if (a >= 0 && parts[a + 1] && !u.searchParams.get('i')) return { title: nice(parts[a + 1]), artist: '' }; }
+    } catch { /* no guess */ }
+    return null;
+  };
+  const autofill = async p => {
+    if (!p || looked === p.url) return;
+    looked = p.url;
+    if (!d.tTitle) ti.value = '';   // a new link: forget what the last one filled in
+    if (!d.tArtist) ar.value = '';
+    update();   // the preview drops the old link's name straight away
+    const mh = $('#metaHint'); mh.textContent = 'Looking up the song name and artist…';
+    const g = slugGuess(p);   // instant first guess from the address, replaced by the real lookup if that works
+    if (g && (g.title || g.artist)) {
+      if (g.title && !ti.value.trim()) ti.value = g.title;
+      if (g.artist && !ar.value.trim()) ar.value = g.artist;
+      update();
+    }
+    try {
+      const r = await lookup(p);
       if (looked !== p.url) return;
-      const by = String(j.author_name || '').replace(/\s*(- Topic|VEVO|Official)$/i, '').trim().slice(0, 60);
-      let name = String(j.title || '').replace(/\s*[([][^)\]]*(official|video|audio|lyric|visuali[sz]er|hd|4k|remaster)[^)\]]*[)\]]/gi, '').trim();
-      const dash = name.match(/^(.+?)\s+[-–—]\s+(.+)$/); // "Artist - Title" (YouTube style)
-      if (dash && by && dash[1].toLowerCase().includes(by.toLowerCase())) name = dash[2];
-      name = name.slice(0, 80);
-      if (name && !ti.value.trim()) ti.value = name;
-      if (by && !ar.value.trim()) ar.value = by;
-      if (name || by) { $('#metaHint').textContent = 'Filled in from the link. Check it reads right.'; update(); }
-    } catch { /* blocked or offline: the person types it */ }
+      /* boxes that are empty, or still hold what the last link filled in, get replaced; anything the person typed stays */
+      if (r.title && !d.tTitle) ti.value = r.title;
+      if (r.artist && !d.tArtist) ar.value = r.artist;
+      mh.textContent = r.title && !r.artist ? 'Filled in the song name. This link does not share the artist, so type the artist in.' : r.title || r.artist ? (r.guess && r.artist ? 'Filled in from the link. Spotify does not share the artist, so check that one reads right.' : 'Filled in from the link. Check it reads right.') : 'Could not read the name from that link. Type it in.';
+      update();
+    } catch { if (looked === p.url) mh.textContent = g && (g.title || g.artist) ? 'Filled in from the link address. Check the spelling.' : 'Could not read the name from that link. Type the name and artist in.'; }
   };
   const update = () => {
-    d.link = link.value; d.note = note.value; d.title = ti.value; d.artist = ar.value;
-    $('#noteCtr').textContent = `${note.value.length}/90`;
+    d.link = link.value; d.note = note.textContent.trim(); d.noteRich = ne.value(); d.title = ti.value; d.artist = ar.value;
+    $('#noteCtr').textContent = `${note.textContent.length}/90`;
     const p = parseSongLink(link.value);
     if (!link.value.trim()) { hint.className = 'hint'; hint.textContent = `Paste a song, album or playlist link from ${SERVICE_LIST}.`; }
-    else if (p) { hint.className = 'hint good'; hint.textContent = `Looks good: ${serviceName(p.kind)} ${p.type === 'link' ? 'link' : p.type}. Add its name and artist below.`; }
+    else if (p) { hint.className = 'hint good'; hint.textContent = `Looks good: ${serviceName(p.kind)} ${p.type === 'link' ? 'link' : p.type}. Its name and artist fill in below.`; }
     else { hint.className = 'hint'; hint.textContent = `That link isn't from a supported site. Use the full link from ${SERVICE_LIST}. Short links (like spotify.link) can't be checked.`; }
-    $('#offerPreview').innerHTML = p ? playerCard({ url: p.url, title: ti.value.trim() || 'Song name', artist: ar.value.trim() || 'Artist', note: note.value }, { embed: false })
-        + noteQuote({ title: 1, note: note.value || 'Your note shows here' }, 'Your note')
+    $('#offerPreview').innerHTML = p ? playerCard({ url: p.url, title: ti.value.trim() || 'Song name', artist: ar.value.trim() || 'Artist', note: d.note }, { embed: false, tag: d.mood ? songTag(d) : undefined })
+        + noteQuote({ title: 1, note: d.note || 'Your note shows here', noteRich: d.note ? d.noteRich : null }, 'Your note')
       : `<div class="placeholder-card">Paste a link to see your song card.</div>`;
     autofill(p);
   };
   link.oninput = note.oninput = ti.oninput = ar.oninput = update; update();
-  $$('input[name=mood]').forEach(r => r.onchange = () => (d.mood = r.value));
+  $$('input[name=mood]').forEach(r => r.onchange = () => { d.mood = r.value; $('#f-label').value = r.value; update(); });
+  $('#f-label').onchange = e => { d.mood = e.target.value; $$('input[name=mood]').forEach(x => { x.checked = x.value === d.mood; }); update(); };
+  $('#f-cosmic').onchange = e => { d.cosmic = e.target.value; update(); };
   $('#offerForm').onsubmit = e => {
     e.preventDefault();
     const err = $('#offerErr');
@@ -3148,7 +3291,7 @@ function renderSubmitted() {
     <div class="ripple"><span></span><span></span><span></span>${orb(130)}</div>
     <h2>Your song is in the pool</h2>
     <p class="lede">Strangers can now pull it by mood (${esc(m?.l || '')}). When someone offers you a song for it, you'll get a notification and can accept or decline. You don't have to wait here.</p>
-    <div style="width:100%;max-width:340px">${playerCard(song, { tag: moodTag(song.mood), embed: false })}</div>
+    <div style="width:100%;max-width:340px">${playerCard(song, { tag: songTag(song), embed: false })}</div>
     ${noteQuote(song, 'Your note')}
     <div class="row" style="justify-content:center"><a class="btn primary" href="#find">Find a song to swap</a><button class="btn" id="subAgain" type="button">Submit another</button><a class="btn" href="#swaps">My songs</a></div>
   </section>`;
@@ -3158,13 +3301,13 @@ function renderSubmitted() {
 /* ---------- find: pick a mood → random pool song → offer one of mine ---------- */
 async function renderFind() {
   const f = S.find;
-  view().innerHTML = `<p class="eyebrow">Find a song</p>
-    <h1 style="font-size:clamp(2rem,5vw,2.8rem);margin-top:6px">Pick a mood.</h1>
-    <p class="muted" style="margin-top:8px;max-width:60ch">We pull a random song from the pool that matches. You won't see who sent it. Offer one of your songs in exchange, and if they accept, the swap begins.</p>
-    <div class="row" style="margin-top:14px"><span class="tag quota" id="offerQuota"></span><a class="btn small" href="#moods">Browse swapped songs by mood</a></div>
-    <fieldset style="margin-top:18px"><legend class="sr">Mood</legend><div class="chips" id="findMoods">
-      ${MOODS.map(m => `<label class="chip" style="margin:0;font-weight:500"><input type="radio" name="fm" value="${m.k}"${f.mood === m.k ? ' checked' : ''}><span>${m.i} ${m.l}</span></label>`).join('')}
-    </div></fieldset>
+  view().innerHTML = `<p class="eyebrow" style="margin-inline:auto">Find a song</p>
+    <h1 style="font-size:clamp(2rem,5vw,2.8rem);display:table;margin:6px auto 0">The Archive</h1>
+    <div class="row" style="margin-top:14px;justify-content:center"><span class="tag quota" id="offerQuota"></span><a class="btn small" href="#moods">Browse swapped songs by mood</a></div>
+    <div class="two find-filters" style="margin:14px auto 0;max-width:560px">
+      <div><label for="fl-label"><span>Label</span></label><select id="fl-label"><option value="">Choose a label</option>${MOODS.map(m => `<option value="${m.k}"${f.mood === m.k ? ' selected' : ''}>${m.l}</option>`).join('')}</select></div>
+      <div><label for="fl-cosmic"><span>Cosmic Object</span></label><select id="fl-cosmic"><option value="">Choose Cosmic Object</option>${COSMIC.map(([g, list]) => `<optgroup label="${g}">${list.map(o => `<option${f.cosmic === o ? ' selected' : ''}>${o}</option>`).join('')}</optgroup>`).join('')}</select></div>
+    </div>
     <div id="findRes" class="find-res" aria-live="polite"></div>`;
   const res = $('#findRes');
   const quota = () => { const q = $('#offerQuota'); if (q) q.innerHTML = `<b>${offersToday(S.user)}</b>/${OFFER_MAX} offers today`; };
@@ -3174,25 +3317,26 @@ async function renderFind() {
     const s = f.song, m = moodOf(f.mood);
     if (!s) {
       res.innerHTML = `<div class="panel empty" style="margin-top:24px">${orb(90)}<h2>No ${esc(m.l.toLowerCase())} songs right now</h2>
-        <p class="muted">The pool has nothing in this mood that you haven't already offered to. Try another mood, or submit a song in this mood for the next person.</p>
+        <p class="muted">The pool has nothing${f.cosmic ? ' tagged ' + esc(f.cosmic) : ''} in this mood that you haven't already offered to. Try another mood${f.cosmic ? ', clear the Cosmic Object' : ''}, or submit a song for the next person.</p>
         <div class="row" style="justify-content:center"><a class="btn primary" href="#submit">Submit a song</a></div></div>`;
       return;
     }
     res.innerHTML = `<div class="grid2" style="margin-top:24px">
       <section class="stack">
         <div class="stranger">${orb(64)}<div><h2 style="font-size:1.4rem">A stranger's ${esc(m.l.toLowerCase())} song</h2><p>${f.total} in the pool for this mood.</p></div></div>
-        ${playerCard(s, { tag: m.l.toUpperCase() })}${noteQuote(s)}
-        <div class="row"><button class="btn primary" id="offerBtn" type="button">Offer a song to swap</button><button class="btn" id="pullAgain" type="button">Pull another</button></div>
+        ${playerCard(s, { tag: m.l.toUpperCase() + (s.cosmic ? ' · ' + s.cosmic.toUpperCase() : '') })}${noteQuote(s)}
+        <div class="row"><button class="btn primary" id="offerBtn" type="button">Offer a song to swap</button><button class="btn" id="pullAgain" type="button">Pull another</button><button class="btn" id="toArchive" type="button">Back to the archive</button></div>
       </section>
       <aside id="offerPanel"></aside></div>`;
     $('#pullAgain').onclick = () => { f.seen.add(s.id); pull(f.mood); };
     $('#offerBtn').onclick = openOffer;
+    $('#toArchive').onclick = () => { f.song = null; archive(); };
   }
   async function pull(mood) {
     f.mood = mood; f.song = null;
     res.innerHTML = '<p class="muted" style="margin-top:24px">Digging through the crates…</p>';
     try {
-      const r = await pullSong(mood);
+      const r = await pullSong(mood, f.cosmic);
       if (f.mood !== mood || S.route !== 'find') return;
       f.song = r.song; f.total = r.total;
     } catch { res.innerHTML = '<p class="err" style="margin-top:24px">Could not reach the pool. Try again.</p>'; return; }
@@ -3229,10 +3373,27 @@ async function renderFind() {
     };
     panel.querySelector('input[name=mine]')?.focus();
   }
-  $$('input[name=fm]').forEach(r => r.onchange = () => pull(r.value));
-  if (f.mood && f.song) show();
-  else if (f.mood) pull(f.mood);
-  else res.innerHTML = `<div class="placeholder-card" style="margin-top:24px">Pick a mood to pull a song.</div>`;
+  /* The Archive: every song ever submitted, as a list (the Universe, but readable). The two dropdowns narrow it down. */
+  async function archive() {
+    res.innerHTML = '<p class="muted" style="margin-top:24px">Opening the archive…</p>';
+    let all;
+    try { all = await S.store.listAll(); } catch { res.innerHTML = '<p class="err" style="margin-top:24px">Could not reach the archive. Try again.</p>'; return; }
+    if (S.route !== 'find') return;
+    all = all.filter(s => parseSongLink(s.url) && (!s.testFor || s.testFor === me()) && (!f.mood || s.mood === f.mood) && (!f.cosmic || s.cosmic === f.cosmic)).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+    const row = s => {
+      const m = moodOf(s.mood), mine = s.owner === me(), open = s.status === 'open';
+      return `<li class="ar-row"><div class="ar-main"><b>${esc(s.title || 'Untitled')}</b><span class="muted">${esc(s.artist || 'Unknown artist')}</span></div>
+        <div class="ar-tags"><span class="tag dim">${esc(m ? m.l : 'Unknown')}</span>${s.cosmic ? `<span class="tag dim">${esc(s.cosmic)}</span>` : ''}<span class="tag dim">${open ? 'Open' : 'Swapped'}</span>${s.createdAt ? `<span class="tag dim">${esc(new Date(s.createdAt).toLocaleDateString())}</span>` : ''}</div>
+        ${open && !mine ? `<button class="btn small" type="button" data-ar="${esc(s.id)}">Offer a swap</button>` : ''}</li>`;
+    };
+    res.innerHTML = `<div class="row" style="margin-top:22px;justify-content:space-between"><p class="muted" style="margin:0"><b>${all.length}</b> song${all.length === 1 ? '' : 's'}${f.mood || f.cosmic ? ' match' : ' in the archive'}</p><button class="btn small primary" type="button" id="arPull">Pull a random song</button></div>
+      ${all.length ? `<ul class="ar-list">${all.map(row).join('')}</ul>` : '<div class="placeholder-card" style="margin-top:16px">Nothing here yet. Try another label or Cosmic Object.</div>'}`;
+    $('#arPull').onclick = () => { if (!f.mood) { toast('Choose a label first, then pull a random song.'); $('#fl-label').focus(); return; } pull(f.mood); };
+    res.querySelectorAll('[data-ar]').forEach(b => b.onclick = () => { const s = all.find(x => x.id === b.dataset.ar); if (!s) return; f.song = s; f.total = 1; f.mood = s.mood; $('#fl-label').value = s.mood; show(); });
+  }
+  $('#fl-label').onchange = e => { f.mood = e.target.value; f.song = null; archive(); };
+  $('#fl-cosmic').onchange = e => { f.cosmic = e.target.value; f.song = null; archive(); };
+  if (f.mood && f.song) show(); else archive();
 }
 
 /* ---------- one swap: react to their song, then the reveal ---------- */
@@ -3257,7 +3418,7 @@ function renderReceive() {
   <div class="grid2">
     <section class="stack">
       <div class="stranger">${orb(64)}<div><h2 style="font-size:1.5rem">Your swap is on. Here's their song.</h2><p>Listen, then react. Their name stays sealed until you do.</p></div></div>
-      ${playerCard(them, { tag: moodTag(them.mood) })}
+      ${playerCard(them, { tag: songTag(them) })}
       ${noteQuote(them)}
     </section>
     <form class="panel" id="reactForm" novalidate>
@@ -3347,11 +3508,11 @@ function richHTML(r) {
   return esc(r?.comment || '');
 }
 /** Turns a contenteditable box into a tiny formatted-text editor with an emoji picker. */
-function initRichEditor(box, max) {
+function initRichEditor(box, max, ctr = '#cCtr') {
   const bar = box.parentElement.querySelector('.rte-bar'), pop = box.parentElement.querySelector('.emoji-pop'), ebtn = bar.querySelector('#emojiBtn');
   let saved = null;
   const len = () => box.textContent.length;
-  const count = () => { const c = $('#cCtr'); if (c) c.textContent = `${len()}/${max}`; };
+  const count = () => { const c = $(ctr); if (c) c.textContent = `${len()}/${max}`; };
   const sync = () => $$('[data-cmd]', bar).forEach(b => { let on = false; try { on = document.queryCommandState(b.dataset.cmd); } catch {} b.setAttribute('aria-pressed', String(!!on)); });
   const keep = () => { const s = getSelection(); if (s.rangeCount && box.contains(s.anchorNode)) saved = s.getRangeAt(0).cloneRange(); };
   document.addEventListener('selectionchange', () => { if (box.isConnected && box.contains(getSelection().anchorNode)) { keep(); sync(); } });
@@ -3423,7 +3584,7 @@ function renderReveal() {
       <div class="stack">
         <div class="rv-item" style="--i:0"><p class="eyebrow">Sent by</p><p class="sender">${esc(them.displayName || 'A stranger')}</p></div>
         <div class="rv-item row" style="--i:1"><span class="tag">${m ? m.i + ' ' + m.l : 'Unknown mood'}</span>${p === 'test_stranger' ? '<span class="tag dim">Test stranger</span>' : pair.bot ? '<span class="tag dim">Sample stranger</span>' : ''}</div>
-        <div class="rv-item" style="--i:2">${playerCard(them, { tag: moodTag(them.mood) })}${noteQuote(them)}</div>
+        <div class="rv-item" style="--i:2">${playerCard(them, { tag: songTag(them) })}${noteQuote(them)}</div>
       </div>
       <div class="stack">
         <div class="rv-item react-card" style="--i:3"><p class="eyebrow" style="margin-bottom:10px">Their reaction to your song</p><div id="theirReact">${reactionHTML(pair.reactions[p], 'They rated it')}</div>
@@ -3545,7 +3706,7 @@ async function tabRequests() {
   const list = S.offersIn.filter(isLive).sort((a, b) => b.at - a.at);
   if (!list.length) return { html: emptyPanel('No requests right now', 'When a stranger offers you a song for one of yours, it shows up here. Submit a song or two so there is something to pull.', '<a class="btn primary" href="#submit">Submit a song</a><a class="btn" href="#find">Find a song</a>') };
   const html = list.map(o => `<article class="panel hist-item">
-      ${playerCard(o.offerSong, { tag: moodTag(o.offerSong?.mood), embed: false })}
+      ${playerCard(o.offerSong, { tag: songTag(o.offerSong), embed: false })}
       <div style="min-width:0">
         <p class="eyebrow">Offered for your song</p>
         <h3 style="font-size:1.5rem;margin-top:4px;font-style:italic;overflow-wrap:anywhere">${esc(o.targetSong?.title || 'your song')}</h3>
@@ -3586,12 +3747,12 @@ async function tabSwaps() {
       mine && !theirs && '<span class="tag dim">Waiting for them to react</span>'].filter(Boolean).join('');
     const brief = r => r ? `${esc(r.emoji)} ${Math.max(1, Math.min(5, +r.land || 1))}/5${r.comment ? ` · “${richHTML(r)}”` : ''}${moodChips(r.moods)}` : '<span class="muted">Not yet</span>';
     return `<article class="panel hist-item">
-      ${playerCard(them, { tag: moodTag(them.mood) })}
+      ${playerCard(them, { tag: songTag(them) })}
       <div style="min-width:0">
         <p class="eyebrow">${new Date(pair.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}</p>
         <h3 style="font-size:1.6rem;margin-top:4px;font-style:italic">${revealed ? esc(them.displayName) : 'Still sealed'}</h3>
         <dl class="kv">
-          ${them.title && them.note ? `<dt>Note</dt><dd>“${esc(them.note)}”</dd>` : ''}
+          ${them.title && them.note ? `<dt>Note</dt><dd>“${richHTML({ rich: them.noteRich, comment: them.note })}”</dd>` : ''}
           <dt>Mood</dt><dd>${m ? m.i + ' ' + m.l : '—'}</dd>
           <dt>You</dt><dd>${brief(mine)}</dd>
           <dt>Them</dt><dd>${revealed ? brief(theirs) : 'Hidden until you react'}</dd>
@@ -3643,7 +3804,7 @@ async function tabSongs() {
     const n = S.offersIn.filter(o => isLive(o) && o.targetSongId === s.id).length;
     const status = s.status === 'paired' ? `<span class="pill ok">Swapped</span>` : `<span class="pill wait">In the pool</span>`;
     return `<article class="panel hist-item">
-      ${playerCard(s, { tag: moodTag(s.mood), embed: false })}
+      ${playerCard(s, { tag: songTag(s), embed: false })}
       <div style="min-width:0">
         <div class="row">${status}${s.status === 'open' && n ? `<span class="pill wait">${plural(n, 'offer')} waiting</span>` : ''}</div>
         <p class="hint">${new Date(s.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}</p>
@@ -4847,7 +5008,9 @@ function osMake(id) {
   };
   const CUR = { n: 'ns-resize', s: 'ns-resize', e: 'ew-resize', w: 'ew-resize', ne: 'nesw-resize', sw: 'nesw-resize', nw: 'nwse-resize', se: 'nwse-resize' };
   w.addEventListener('pointerdown', e => { if (e.target !== w) return; const d = edgeAt(e); if (d) startResize(d, e, w); });
-  w.addEventListener('pointermove', e => { if (e.target !== w) return; const d = isPhone() || w.classList.contains('max') ? '' : edgeAt(e); w.style.cursor = d ? CUR[d] : ''; });
+  /* the resize cursor only shows on the window's own border; it used to stay stuck (and be inherited by everything inside) once the mouse left the edge */
+  w.addEventListener('pointermove', e => { const d = e.target !== w || isPhone() || w.classList.contains('max') ? '' : edgeAt(e); w.style.cursor = d ? CUR[d] : ''; });
+  w.addEventListener('pointerleave', () => { w.style.cursor = ''; });
   app.mount?.(rec);
   return rec;
 }
@@ -5865,7 +6028,7 @@ const SWAP_STEPS = [
   { wait: 800, before: () => { osOpen('rr'); location.hash = '#submit'; }, target: () => $('#f-link'), title: '1. Paste a music link', text: 'Copy the link of any song from Spotify, Apple Music, YouTube, SoundCloud and more, and paste it here. A song, an album or a playlist all work.' },
   { target: () => $('#offerForm .two'), title: '2. Name it', text: 'Add the song name and the artist so the stranger knows what they are about to hear.' },
   { target: () => $('#f-note'), title: '3. Say why', text: 'Write one short line about why you picked it. The stranger sees this note with your song, but never who you are.' },
-  { target: () => $('#offerForm .chips'), title: '4. Pick the mood', text: 'Strangers find songs by mood, so this decides who can pull yours. Choose the one that fits.' },
+  { target: () => $('#offerForm #f-label'), title: '4. Pick the label', text: 'Strangers find songs by label, so this decides who can pull yours. Choose the one that fits, and add a Cosmic Object if you like.' },
   { target: () => $('#offerForm .oc-bar'), title: '5. Add it to the pool', text: 'Press "Add to the pool". Your song goes straight in with no waiting. You can submit up to ten songs a day.' },
   { wait: 800, before: () => { location.hash = '#find'; }, target: () => $('#findMoods'), title: '6. Find a song by mood', text: 'Now the other side. Pick a mood and we pull a random song from the pool that matches it. You will never see who sent it. Click a mood to try it.', waitFor: () => !!$('#offerBtn') },
   { target: () => $('#offerBtn') || $('#findRes'), title: '7. Offer one of yours', text: 'Like it? Press "Offer a song to swap" and choose one of your submitted songs. Not for you? Pull another. The owner decides whether to accept.' },
