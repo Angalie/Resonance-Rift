@@ -1621,6 +1621,15 @@ html[data-mode="night"] .taskbtn.on{background:rgba(255,255,255,.3)}
 .ph-head{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;margin-bottom:24px}
 @media (max-width:560px){.ph-head{grid-template-columns:1fr;justify-items:center}.ph-head>span{display:none}.ph-head .btn{justify-self:center!important}}
 .how-actions .btn{font-family:var(--f-pixel);font-weight:400;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;padding:11px 18px}
+.uni-audio{display:flex;align-items:center;gap:12px;margin-top:12px;padding:10px 12px;border:2px solid var(--line-2,rgba(255,255,255,.3));border-radius:12px;background:rgba(255,255,255,.06)}
+.uni-play{appearance:none;margin:0;flex:none;width:44px;height:44px;border-radius:50%;border:2px solid #4b3d7e;background:radial-gradient(circle at 35% 28%,#fff,#f7d3da 55%,#dd8aa0);color:#c4455f;font:700 14px/1 var(--f-pixel);cursor:pointer;box-shadow:0 3px 0 rgba(75,61,126,.5);transform:none}
+.uni-play:disabled{opacity:.6;cursor:wait}
+.uni-ab{flex:1;min-width:0}
+.uni-at{font-size:.9rem;margin-bottom:7px;overflow-wrap:anywhere}
+.uni-prog{height:8px;border-radius:5px;background:rgba(255,255,255,.18);overflow:hidden}
+.uni-prog b{display:block;height:100%;width:0;background:linear-gradient(90deg,#F58EA3,#c99bff)}
+.uni-full{margin-top:12px}
+.uni-full summary{cursor:pointer;font-size:.9rem;opacity:.9}
 .uni-player iframe{width:100%;height:152px;border:2px solid rgba(255,255,255,.3);border-radius:12px;margin:10px 0 0;background:#000;display:block}
 .uni-player.yt iframe{height:auto;aspect-ratio:16/9}
 .uni-songs{display:flex;flex-direction:column;gap:6px;margin-top:10px;max-height:210px;overflow:auto}
@@ -4809,7 +4818,8 @@ function renderUniverse() {
     songsFor(id).forEach(s => { const a = String(s.artist || '').trim().toLowerCase(), k = a ? 'a:' + a : 's:' + s.id; if (!m.has(k)) m.set(k, { key: k, artist: String(s.artist || '').trim(), songs: [] }); m.get(k).songs.push(s); });
     return [...m.values()];
   };
-  let clusterSel = null, backGroup = null;
+  let clusterSel = null, backGroup = null, curAudio = null;
+  const stopAudio = () => { if (curAudio) { try { curAudio.pause(); } catch { /* already stopped */ } curAudio = null; } };
   const nm = o => o.name + (songsFor(o.id).length ? ' ✦' + songsFor(o.id).length : '');
   (async () => {   // every submitted song with a Cosmic Object becomes a star around that object
     try {
@@ -4974,7 +4984,7 @@ function renderUniverse() {
   };
 
   const frame = now => {
-    if (!cv.isConnected || S.route !== 'universe') { try { ro && ro.disconnect(); } catch {} return; }
+    if (!cv.isConnected || S.route !== 'universe') { stopAudio(); try { ro && ro.disconnect(); } catch {} return; }
     requestAnimationFrame(frame);
     const dt = Math.min(.05, (now - (last || now)) / 1000); last = now;
     if (!W) { fit(); return; }
@@ -4993,6 +5003,7 @@ function renderUniverse() {
   /* ---- info card + object list ---- */
   const info = $('#uInfo'), chips = $('#uChips');
   const showInfo = o => {
+    stopAudio();
     info.innerHTML = '<h2 class="uni-name"></h2><p class="uni-kind"></p><p class="uni-desc"></p><dl class="uni-stats"></dl>';
     $('.uni-name', info).textContent = o.name; $('.uni-kind', info).textContent = o.kind; $('.uni-desc', info).textContent = o.info;
     const n = o.id ? songsFor(o.id).length : 0, rows = o.stats.slice();
@@ -5001,6 +5012,7 @@ function renderUniverse() {
     if (n) info.insertAdjacentHTML('beforeend', '<div class="uni-legend" aria-label="Star colours by label">' + MOODS.map(m => '<span style="color:' + MOOD_GLOW[m.k] + '"><i></i><b>' + esc(m.l) + '</b></span>').join('') + '</div>');
   };
   const showCluster = gr => {
+    stopAudio();
     clusterSel = gr.key; starSel = null; backGroup = null;
     info.innerHTML = '<h2 class="uni-name"></h2><p class="uni-kind"></p><div class="uni-songs"></div><div class="row" style="margin-top:10px"></div>';
     $('.uni-name', info).textContent = gr.artist || 'Star cluster'; $('.uni-kind', info).textContent = gr.songs.length + ' songs by the same artist · a star cluster near ' + (byId[sel] ? byId[sel].name : 'here');
@@ -5014,13 +5026,43 @@ function renderUniverse() {
     $('.uni-name', info).textContent = s.title || 'Untitled'; $('.uni-kind', info).textContent = (s.artist || 'Unknown artist') + ' · a star near ' + (byId[sel] ? byId[sel].name : 'here'); $('.uni-desc', info).textContent = s.note ? '“' + s.note + '”' : '';
     $('.uni-stats', info).innerHTML = '<div><dt>Label</dt><dd style="color:' + (MOOD_GLOW[s.mood] || '#fff') + '">' + esc(m ? m.l : 'Unknown') + '</dd></div><div><dt>Cosmic Object</dt><dd>' + esc(s.cosmic || '') + '</dd></div>';
     const row = $('.row', info);
-    if (link && link.embed) {   // play it right here with the service's own embedded player
-      const box = document.createElement('div'); box.className = 'pp-embed-box uni-player' + (link.kind === 'youtube' ? ' yt' : '');
-      const f = document.createElement('iframe'); f.src = link.embed; f.title = 'Play ' + (s.title || 'song'); f.loading = 'lazy'; f.allow = 'autoplay; clipboard-write; encrypted-media; picture-in-picture'; f.referrerPolicy = 'strict-origin-when-cross-origin'; box.append(f);
-      info.insertBefore(box, row);
-      const note = document.createElement('p'); note.className = 'hint'; note.style.cssText = 'margin:6px 0 0;font-size:.8rem;opacity:.8'; note.textContent = 'Player blank? Some sites and browsers block embedded players. Use the button below to open the song.'; info.insertBefore(note, row);
+    stopAudio();
+    /* a little player of our own: a 30-second preview (Apple's public preview clips) that plays right here; the service's full player opens below on request */
+    const ab = document.createElement('div'); ab.className = 'uni-audio';
+    ab.innerHTML = '<button type="button" class="uni-play" aria-label="Play preview">▶</button><div class="uni-ab"><div class="uni-at"></div><div class="uni-prog" aria-hidden="true"><b></b></div></div>';
+    info.insertBefore(ab, row);
+    const pb = $('.uni-play', ab), at = $('.uni-at', ab), pg = $('.uni-prog b', ab);
+    at.textContent = 'Press play for a 30-second preview';
+    pb.onclick = async () => {
+      if (curAudio) { if (curAudio.paused) curAudio.play().catch(() => {}); else curAudio.pause(); return; }
+      at.textContent = 'Finding the preview…'; pb.disabled = true;
+      try {
+        const ctl = new AbortController(), tm = setTimeout(() => ctl.abort(), 6000);
+        const j = await (await fetch('https://itunes.apple.com/search?entity=song&limit=15&term=' + encodeURIComponent(((s.title || '') + ' ' + (s.artist || '')).trim()), { signal: ctl.signal })).json(); clearTimeout(tm);
+        const nz = x => String(x || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim(), T = nz(s.title), A = nz(s.artist), list = (j.results || []).filter(x => x.previewUrl);
+        const hit = list.find(x => nz(x.trackName) === T && (!A || nz(x.artistName).includes(A) || A.includes(nz(x.artistName)))) || list.find(x => nz(x.trackName).includes(T) && (!A || nz(x.artistName).includes(A))) || list[0];
+        if (!hit) throw new Error('none');
+        const au = new Audio(hit.previewUrl); curAudio = au; at.textContent = hit.trackName + ' · ' + hit.artistName + ' (30 s preview)';
+        au.addEventListener('timeupdate', () => { pg.style.width = (au.currentTime / (au.duration || 30) * 100) + '%'; });
+        au.addEventListener('play', () => { pb.textContent = '❚❚'; pb.setAttribute('aria-label', 'Pause'); });
+        au.addEventListener('pause', () => { pb.textContent = '▶'; pb.setAttribute('aria-label', 'Play preview'); });
+        au.addEventListener('ended', () => { pg.style.width = '0'; });
+        au.addEventListener('error', () => { at.textContent = 'This browser could not play the preview. Use the full player below.'; });
+        await au.play();
+      } catch { at.textContent = 'No preview here (this page may block outside audio). Use the full player below.'; }
+      pb.disabled = false;
+    };
+    if (link && link.embed) {   // the service's own full player, loaded only when asked for
+      const d = document.createElement('details'); d.className = 'uni-full'; d.innerHTML = '<summary>Play the full song with ' + esc(serviceName(link.kind)) + '’s player</summary>';
+      d.addEventListener('toggle', () => {
+        if (!d.open || d.querySelector('iframe')) return; stopAudio();
+        const box = document.createElement('div'); box.className = 'pp-embed-box uni-player' + (link.kind === 'youtube' ? ' yt' : '');
+        const f = document.createElement('iframe'); f.src = link.embed; f.title = 'Play ' + (s.title || 'song'); f.loading = 'lazy'; f.allow = 'autoplay; clipboard-write; encrypted-media; picture-in-picture'; f.referrerPolicy = 'strict-origin-when-cross-origin'; box.append(f); d.append(box);
+        const note = document.createElement('p'); note.className = 'hint'; note.style.cssText = 'margin:6px 0 0;font-size:.8rem;opacity:.8'; note.textContent = 'Player blank? Some sites and browsers block embedded players. Use the button below to open the song.'; d.append(note);
+      });
+      info.insertBefore(d, row);
     }
-    if (link) { const a = document.createElement('a'); a.className = 'btn small'; a.href = link.url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = link.embed ? 'Not playing? Open on ' + serviceName(link.kind) : 'Listen on ' + serviceName(link.kind); row.append(a); }
+    if (link) { const a = document.createElement('a'); a.className = 'btn small'; a.href = link.url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = 'Open on ' + serviceName(link.kind); row.append(a); }
     const b = document.createElement('button'); b.type = 'button'; b.className = 'btn small'; b.textContent = 'Back to ' + (byId[sel] ? byId[sel].name : 'the list'); b.onclick = () => { starSel = null; if (fromCluster && backGroup) showCluster(backGroup); else if (sel && byId[sel]) showInfo(byId[sel]); }; if (fromCluster && backGroup) b.textContent = 'Back to ' + (backGroup.artist || 'the cluster'); row.append(b);
   };
   const drawChips = () => { chips.innerHTML = (scene === 'solar' ? UNI_SOLAR : UNI_GALAXY).map(o => '<button type="button" class="uni-chip" data-o="' + o.id + '" aria-pressed="' + (sel === o.id) + '">' + esc(o.name) + '</button>').join(''); };
