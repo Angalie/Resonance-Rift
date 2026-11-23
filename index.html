@@ -450,6 +450,9 @@ legend{font-weight:600;font-size:.9rem;margin:18px 0 9px;padding:0}
 .pp.wa .pp-tag{background:#4a3a3d;color:#f3d8dc;border-radius:3px}
 .pp.wa .pp-embed{margin:0;padding:0 8px 8px;color:#4a3a3d}
 .pp.wa .pp-embed summary{color:#4a3a3d}
+.pp.wa.yt-on .wa-seek b{animation:none!important}
+.pp.wa .wa-seek,.pp.wa .wa-vt{touch-action:none;cursor:pointer}
+.pp.wa .wa-spk{cursor:pointer}
 .pp.wa.compact{max-width:none;box-shadow:3px 3px 0 rgba(60,35,45,.35)}
 .pp.wa.compact .wa-menu,.pp.wa.compact .wa-vol{display:none}
 .pp.wa.compact .wa-time{font-size:15px}
@@ -2783,7 +2786,7 @@ function renderFooter() {
 /* ---- find a song on YouTube from its name and artist (no key): Piped's public search, best match by title and uploader ---- */
 const PIPED = ['https://api.piped.private.coffee', 'https://pipedapi.kavin.rocks', 'https://pipedapi.adminforge.de'], YT_CACHE = {};
 const ytOk = id => /^[\w-]{11}$/.test(String(id || ''));
-const ytEmbedURL = id => 'https://www.youtube-nocookie.com/embed/' + id;
+const ytEmbedURL = id => 'https://www.youtube-nocookie.com/embed/' + id + '?enablejsapi=1&rel=0&playsinline=1' + (/^https?:$/.test(location.protocol) ? '&origin=' + encodeURIComponent(location.origin) : '');
 async function ytFind(title, artist) {
   title = String(title || '').trim(); artist = String(artist || '').trim(); if (!title) return '';
   const key = (title + '|' + artist).toLowerCase(); if (key in YT_CACHE) return YT_CACHE[key];
@@ -2851,6 +2854,74 @@ function playerCard(song, { tag = 'MYSTERY', title, compact = false, embed = tru
     ${embed && link?.embed ? `<details class="pp-embed" data-url="${esc(link.url)}"><summary>Try embedded player</summary><div class="pp-embed-box${link.kind === 'youtube' ? ' yt' : ''}"></div><p class="pp-embed-note">Some hosts block embedded players. If this stays blank, press ▶ instead.</p></details>` : ''}
   </div>`;
 }
+/* ---- Riftamp controls drive the YouTube player under the card (YouTube's own postMessage channel; no extra script) ---- */
+(function () {
+  const frameOf = card => card && card.querySelector('iframe[src*="youtube"]');
+  const send = (f, o) => { try { f.contentWindow.postMessage(JSON.stringify(o), '*'); } catch { /* the player is not there (yet) */ } };
+  const cmd = (card, func, args = []) => { const f = frameOf(card); if (f) send(f, { event: 'command', func, args }); };
+  const fmt = t => { t = Math.max(0, Math.floor(t || 0)); return Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0'); };
+  const paint = card => {
+    const s = card._yt || {}, d = s.d || 0, fr = d ? Math.min(1, (s.t || 0) / d) : 0;
+    card.classList.add('yt-on'); card.classList.toggle('playing', !!s.playing);
+    const tm = card.querySelector('.wa-time'); if (tm) tm.textContent = fmt(s.t);
+    const sk = card.querySelector('.wa-seek b'); if (sk) { sk.style.right = 'auto'; sk.style.left = 'calc((100% - 28px) * ' + fr.toFixed(4) + ')'; }
+    const vk = card.querySelector('.wa-vt b'); if (vk) { vk.style.right = 'auto'; vk.style.left = 'calc((100% - 20px) * ' + ((s.mute ? 0 : (s.v == null ? 100 : s.v)) / 100).toFixed(3) + ')'; }
+    const pl = card.querySelector('.wa-b.play'); if (pl) pl.textContent = s.playing ? '❚❚' : '▶';
+  };
+  /* listen to the players: time, length, state and volume come back as messages */
+  window.addEventListener('message', e => {
+    if (!/youtube(-nocookie)?\.com$/.test(String(e.origin).replace(/^https?:\/\//, ''))) return;
+    let m; try { m = typeof e.data === 'string' ? JSON.parse(e.data) : e.data; } catch { return; }
+    if (!m || !m.event) return;
+    const f = [...document.querySelectorAll('.pp.wa iframe')].find(x => x.contentWindow === e.source); if (!f) return;
+    const card = f.closest('.pp.wa'), s = card._yt = card._yt || {}, i = m.info;
+    if (m.event === 'onStateChange' && typeof i === 'number') s.st = i;
+    else if ((m.event === 'infoDelivery' || m.event === 'initialDelivery') && i) {
+      if (i.currentTime != null) s.t = i.currentTime; if (i.duration) s.d = i.duration; if (i.playerState != null) s.st = i.playerState; if (i.volume != null) s.v = i.volume; if (i.muted != null) s.mute = !!i.muted;
+    } else return;
+    /* playing = the clock is moving (the reported state can lag behind); a jump from seeking does not count */
+    if (i && i.currentTime != null) { const d = i.currentTime - (s.pt == null ? i.currentTime : s.pt); if (d > .05 && d < 2.5) s.adv = Date.now(); s.pt = i.currentTime; }
+    if (m.event === 'onStateChange' && i === 1) s.adv = Date.now();
+    if (m.event === 'onStateChange' && (i === 2 || i === 0)) s.adv = 0;
+    s.playing = Date.now() - (s.adv || 0) < 1300;
+    clearTimeout(s.tm); s.tm = setTimeout(() => { if (Date.now() - (s.adv || 0) >= 1300 && s.playing) { s.playing = false; paint(card); } }, 1400);
+    paint(card);
+  });
+  /* say hello to each player as it loads so it starts sending those messages */
+  document.addEventListener('load', e => {
+    const f = e.target; if (!f || f.tagName !== 'IFRAME' || !f.closest('.pp.wa') || !/youtube/.test(f.src)) return;
+    const hello = () => send(f, { event: 'listening', id: 1, channel: 'widget' }); hello(); setTimeout(hello, 900); setTimeout(hello, 2500);
+  }, true);
+  /* buttons: back, play/pause, pause, stop, forward */
+  document.addEventListener('click', e => {
+    const b = e.target.closest('.pp.wa .wa-b, .pp.wa .wa-spk'); if (!b) return;
+    const card = b.closest('.pp.wa'); if (!frameOf(card)) return;   // no YouTube player: the ▶ link keeps opening the song
+    e.preventDefault(); e.stopImmediatePropagation();
+    const s = card._yt = card._yt || {};
+    if (b.classList.contains('wa-spk')) { s.mute = !s.mute; cmd(card, s.mute ? 'mute' : 'unMute'); paint(card); return; }
+    const k = [...b.parentElement.children].indexOf(b);
+    if (k === 0) { cmd(card, 'seekTo', [(s.t || 0) > 3 ? 0 : Math.max(0, (s.t || 0) - 10), true]); s.t = (s.t || 0) > 3 ? 0 : Math.max(0, (s.t || 0) - 10); }
+    else if (k === 1) { cmd(card, s.playing ? 'pauseVideo' : 'playVideo'); if (s.playing) { s.playing = false; s.adv = 0; } }
+    else if (k === 2) cmd(card, 'pauseVideo');
+    else if (k === 3) { cmd(card, 'seekTo', [0, true]); cmd(card, 'pauseVideo'); s.t = 0; s.playing = false; s.adv = 0; }
+    else if (k === 4) { const to = Math.min(s.d || 1e9, (s.t || 0) + 15); cmd(card, 'seekTo', [to, true]); s.t = to; }
+    paint(card);
+  }, true);
+  /* sliders: drag along the seek bar and the volume bar */
+  document.addEventListener('pointerdown', e => {
+    const bar = e.target.closest('.pp.wa .wa-seek, .pp.wa .wa-vt'); if (!bar) return;
+    const card = bar.closest('.pp.wa'); if (!frameOf(card)) return;
+    const isSeek = bar.classList.contains('wa-seek'), s = card._yt = card._yt || {};
+    if (isSeek && !s.d) return;   // the length is not known yet
+    e.preventDefault(); bar.setPointerCapture(e.pointerId);
+    const move = ev => {
+      const r = bar.getBoundingClientRect(), fr = Math.max(0, Math.min(1, (ev.clientX - r.left) / r.width));
+      if (isSeek) { s.t = fr * s.d; paint(card); } else { s.v = Math.round(fr * 100); s.mute = false; cmd(card, 'unMute'); cmd(card, 'setVolume', [s.v]); paint(card); }
+    };
+    const up = ev => { bar.removeEventListener('pointermove', move); bar.removeEventListener('pointerup', up); bar.removeEventListener('pointercancel', up); if (isSeek) { const r = bar.getBoundingClientRect(), fr = Math.max(0, Math.min(1, (ev.clientX - r.left) / r.width)); cmd(card, 'seekTo', [fr * s.d, true]); } };
+    bar.addEventListener('pointermove', move); bar.addEventListener('pointerup', up); bar.addEventListener('pointercancel', up); move(e);
+  });
+})();
 const moodTag = k => (moodOf(k)?.l || 'Unknown').toUpperCase();
 const songTag = s => moodTag(s?.mood) + (s?.cosmic ? ' · ' + String(s.cosmic).toUpperCase() : '');
 /** The glossy bubble with the Resonance Rift emblem inside (home hero). Other orbs stay as the hidden-person "?" bubble. */
@@ -5117,7 +5188,7 @@ function renderUniverse() {
       stage.innerHTML = '';
       if (id) {
         const box = document.createElement('div'); box.className = 'pp-embed-box uni-player yt';
-        const f = document.createElement('iframe'); f.src = ytEmbedURL(id) + '?rel=0&playsinline=1'; f.title = 'Play ' + (s.title || 'song'); f.allow = 'autoplay; clipboard-write; encrypted-media; picture-in-picture'; f.allowFullscreen = true; f.referrerPolicy = 'strict-origin-when-cross-origin'; box.append(f); stage.append(box);
+        const f = document.createElement('iframe'); f.src = ytEmbedURL(id); f.title = 'Play ' + (s.title || 'song'); f.allow = 'autoplay; clipboard-write; encrypted-media; picture-in-picture'; f.allowFullscreen = true; f.referrerPolicy = 'strict-origin-when-cross-origin'; box.append(f); stage.append(box);
         const n = document.createElement('p'); n.className = 'hint'; n.style.cssText = 'margin:6px 0 0;font-size:.8rem;opacity:.85'; n.textContent = 'Press the red play button. If the video stays blank or shows an error, this page blocks YouTube embeds; try the site on GitHub.'; stage.append(n);
       } else if (link && link.embed) {   // no YouTube match: the song's own service player goes in the same spot
         const box = document.createElement('div'); box.className = 'pp-embed-box uni-player' + (link.kind === 'youtube' ? ' yt' : '');
