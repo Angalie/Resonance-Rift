@@ -5119,6 +5119,10 @@ function renderUniverse() {
         const box = document.createElement('div'); box.className = 'pp-embed-box uni-player yt';
         const f = document.createElement('iframe'); f.src = ytEmbedURL(id) + '?rel=0&playsinline=1'; f.title = 'Play ' + (s.title || 'song'); f.allow = 'autoplay; clipboard-write; encrypted-media; picture-in-picture'; f.allowFullscreen = true; f.referrerPolicy = 'strict-origin-when-cross-origin'; box.append(f); stage.append(box);
         const n = document.createElement('p'); n.className = 'hint'; n.style.cssText = 'margin:6px 0 0;font-size:.8rem;opacity:.85'; n.textContent = 'Press the red play button. If the video stays blank or shows an error, this page blocks YouTube embeds; try the site on GitHub.'; stage.append(n);
+      } else if (link && link.embed) {   // no YouTube match: the song's own service player goes in the same spot
+        const box = document.createElement('div'); box.className = 'pp-embed-box uni-player' + (link.kind === 'youtube' ? ' yt' : '');
+        const f = document.createElement('iframe'); f.src = link.embed; f.title = 'Play ' + (s.title || 'song'); f.allow = 'autoplay; clipboard-write; encrypted-media; picture-in-picture'; f.referrerPolicy = 'strict-origin-when-cross-origin'; box.append(f); stage.append(box);
+        const n = document.createElement('p'); n.className = 'hint'; n.style.cssText = 'margin:6px 0 0;font-size:.8rem;opacity:.85'; n.textContent = 'No YouTube match found, so this is the ' + serviceName(link.kind) + ' player. If it stays blank, this page blocks embedded players; use the buttons below.'; stage.append(n);
       } else previewWidget();
     })();
     if (link) { const a = document.createElement('a'); a.className = 'btn small'; a.href = link.url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = 'Open on ' + serviceName(link.kind); row.append(a); }
