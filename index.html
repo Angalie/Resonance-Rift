@@ -2458,7 +2458,7 @@ async function commitUser() {
 }
 
 function songPublic(s) {
-  return { id: s.id, owner: s.owner, url: s.url, kind: s.kind, title: s.title || '', artist: s.artist || '', note: s.note, noteRich: s.noteRich || null, mood: s.mood, cosmic: s.cosmic || '', displayName: s.displayName };
+  return { id: s.id, owner: s.owner, url: s.url, kind: s.kind, title: s.title || '', artist: s.artist || '', note: s.note, yt: s.yt || '', noteRich: s.noteRich || null, mood: s.mood, cosmic: s.cosmic || '', displayName: s.displayName };
 }
 /** The sender's "why this one" line, shown under the card now that the card shows the song name. */
 const noteQuote = (song, label = 'Their note') => (song?.note && song?.title ? `<p class="note-q"><small>${label}</small>“${richHTML({ rich: song.noteRich, comment: song.note })}”</p>` : '');
@@ -2678,7 +2678,7 @@ async function submitSong() {
   if (!link) throw new Error('That link is not from a supported music site.');
   if (!moodOf(d.mood)) throw new Error('Pick the mood that fits before you submit.');
   if (todayCount(u) >= DAILY_MAX) throw new Error(`You've submitted all ${DAILY_MAX} songs for today.`);
-  const song = { id: uid('s_'), owner: u.username, kind: link.kind, url: link.url, title: d.title.trim(), artist: d.artist.trim(), note: d.note.trim(), noteRich: Array.isArray(d.noteRich) && d.noteRich.some(x => x[1]) ? d.noteRich.map(x => [String(x[0]).slice(0, 90), x[1] | 0]).slice(0, 30) : null, mood: d.mood, cosmic: COSMIC_ALL.includes(d.cosmic) ? d.cosmic : '', displayName: u.username, status: 'open', createdAt: Date.now() };
+  const song = { id: uid('s_'), owner: u.username, kind: link.kind, url: link.url, title: d.title.trim(), artist: d.artist.trim(), yt: ytOk(d.yt) ? d.yt : '', note: d.note.trim(), noteRich: Array.isArray(d.noteRich) && d.noteRich.some(x => x[1]) ? d.noteRich.map(x => [String(x[0]).slice(0, 90), x[1] | 0]).slice(0, 30) : null, mood: d.mood, cosmic: COSMIC_ALL.includes(d.cosmic) ? d.cosmic : '', displayName: u.username, status: 'open', createdAt: Date.now() };
   await S.store.put(SONGS, song.id, song);
   const t = todayUTC(); if (u.day?.date !== t) u.day = { date: t, count: 0 };
   u.day.count++; u.stats.submitted++;
@@ -2778,8 +2778,40 @@ function renderFooter() {
     : `Mode: local demo (this browser only) with 15 sample strangers.${S.note ? ' ' + S.note : ''}`;
 }
 
+/* ---- find a song on YouTube from its name and artist (no key): Piped's public search, best match by title and uploader ---- */
+const PIPED = ['https://api.piped.private.coffee', 'https://pipedapi.kavin.rocks', 'https://pipedapi.adminforge.de'], YT_CACHE = {};
+const ytOk = id => /^[\w-]{11}$/.test(String(id || ''));
+const ytEmbedURL = id => 'https://www.youtube-nocookie.com/embed/' + id;
+async function ytFind(title, artist) {
+  title = String(title || '').trim(); artist = String(artist || '').trim(); if (!title) return '';
+  const key = (title + '|' + artist).toLowerCase(); if (key in YT_CACHE) return YT_CACHE[key];
+  const nz = x => String(x || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim(), T = nz(title), A = nz(artist), bad = /cover|karaoke|remix|live|instrumental|slowed|sped up|nightcore|reverb|8d/i;
+  const best = items => {
+    let top = null, sc = 1;
+    (items || []).forEach(x => {
+      const m = /^\/watch\?v=([\w-]{11})/.exec(x.url || ''); if (!m) return;
+      const t = nz(x.title), up = nz(x.uploaderName); let s = 0;
+      if (t === T) s += 3; else if (t.includes(T) || T.includes(t)) s += 2;
+      if (A && (up.includes(A) || A.includes(up.replace(/ topic$/, '')))) s += 2;
+      if (/topic|vevo|official/.test(up)) s += 1;
+      if (bad.test(x.title || '') && !bad.test(title)) s -= 3;
+      if (s > sc) { sc = s; top = m[1]; }
+    });
+    return top;
+  };
+  const ask = async (base, q, filter) => { const ctl = new AbortController(), tm = setTimeout(() => ctl.abort(), 5500); try { const r = await fetch(base + '/search?q=' + encodeURIComponent(q) + '&filter=' + filter, { signal: ctl.signal }); if (!r.ok) throw new Error(r.status); return (await r.json()).items || []; } finally { clearTimeout(tm); } };
+  let id = '';
+  for (const base of PIPED) {
+    try {
+      id = best(await ask(base, title + ' ' + artist, 'music_songs')) || best(await ask(base, title + ' ' + artist + ' official audio', 'videos')) || '';
+      break;   // this server answered, so there is no need to try the others
+    } catch { /* try the next server */ }
+  }
+  return (YT_CACHE[key] = id);
+}
 /** The pink pixel player. Re-validates the link, escapes every string. */
-function playerCard(song, { tag = 'MYSTERY', title, compact = false, embed = true } = {}) {
+function playerCard(song, { tag = 'MYSTERY', title, compact = false, embed = true, yt } = {}) {
+  const ytMode = yt !== undefined ? yt : (embed ? 'details' : false), ytId = ytOk(song?.yt) ? song.yt : '';
   const link = parseSongLink(song?.url);
   // Song name + artist on the screen; older songs saved before titles existed fall back to the note.
   const t = title ?? (song?.title || song?.note || '');
@@ -2812,6 +2844,8 @@ function playerCard(song, { tag = 'MYSTERY', title, compact = false, embed = tru
       </div>
     </div>
     <div class="pp-foot"><span class="pp-tag${mys ? ' mys' : ''}">PLAYLIST: ${esc(tag)}</span></div>
+    ${ytId && ytMode === 'now' ? `<div class="pp-embed-box yt pp-ytnow" style="padding:0 8px 8px"><iframe src="${esc(ytEmbedURL(ytId))}" title="Play on YouTube" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>` : ''}
+    ${ytId && ytMode === 'details' ? `<details class="pp-yt" data-yt="${esc(ytId)}" style="padding:6px 8px 8px"><summary style="cursor:pointer;font-size:.8rem">Play the whole song here (YouTube)</summary><div class="pp-embed-box yt"></div></details>` : ''}
     ${embed && link?.embed ? `<details class="pp-embed" data-url="${esc(link.url)}"><summary>Try embedded player</summary><div class="pp-embed-box${link.kind === 'youtube' ? ' yt' : ''}"></div><p class="pp-embed-note">Some hosts block embedded players. If this stays blank, press ▶ instead.</p></details>` : ''}
   </div>`;
 }
@@ -3264,7 +3298,7 @@ function renderOffer() {
   const link = $('#f-link'), note = $('#f-note'), hint = $('#linkHint'), ti = $('#f-title'), ar = $('#f-artist');
   const ne = initRichEditor(note, 90, '#noteCtr');
   note.innerHTML = d.note ? richHTML({ rich: d.noteRich, comment: d.note }) : '';
-  let looked = '';
+  let looked = '', ytKey = '', ytTimer = 0;
   /* Fill the song name and artist from the link itself (public lookups, no key): YouTube, SoundCloud and anything noembed knows give both;
      Apple Music is read through the iTunes lookup; Spotify only shares the name, so the artist is matched through iTunes and flagged to double-check.
      Anything that fails (offline, blocked host) just leaves the boxes for the person to type. */
@@ -3328,6 +3362,7 @@ function renderOffer() {
   const autofill = async p => {
     if (!p || looked === p.url) return;
     looked = p.url;
+    d.yt = ''; ytKey = '';
     if (!d.tTitle) ti.value = '';   // a new link: forget what the last one filled in
     if (!d.tArtist) ar.value = '';
     update();   // the preview drops the old link's name straight away
@@ -3352,14 +3387,25 @@ function renderOffer() {
     d.link = link.value; d.note = note.textContent.trim(); d.noteRich = ne.value(); d.title = ti.value; d.artist = ar.value;
     $('#noteCtr').textContent = `${note.textContent.length}/90`;
     const p = parseSongLink(link.value);
+    if (p && p.kind === 'youtube') d.yt = p.id; else if (!p) d.yt = '';
+    if (p && p.kind !== 'youtube') { clearTimeout(ytTimer); ytTimer = setTimeout(ytResolve, 900); }   // name and artist are in: look the song up on YouTube
     if (!link.value.trim()) { hint.className = 'hint'; hint.textContent = `Paste a song, album or playlist link from ${SERVICE_LIST}.`; }
     else if (p) { hint.className = 'hint good'; hint.textContent = `Looks good: ${serviceName(p.kind)} ${p.type === 'link' ? 'link' : p.type}. Its name and artist fill in below.`; }
     else { hint.className = 'hint'; hint.textContent = `That link isn't from a supported site. Use the full link from ${SERVICE_LIST}. Short links (like spotify.link) can't be checked.`; }
-    $('#offerPreview').innerHTML = p ? playerCard({ url: p.url, title: ti.value.trim() || 'Song name', artist: ar.value.trim() || 'Artist', note: d.note }, { embed: false, tag: d.mood ? songTag(d) : undefined })
+    $('#offerPreview').innerHTML = p ? playerCard({ url: p.url, title: ti.value.trim() || 'Song name', artist: ar.value.trim() || 'Artist', note: d.note, yt: d.yt }, { embed: false, yt: 'now', tag: d.mood ? songTag(d) : undefined })
         + noteQuote({ title: 1, note: d.note || 'Your note shows here', noteRich: d.note ? d.noteRich : null }, 'Your note')
       : `<div class="placeholder-card">Paste a link to see your song card.</div>`;
     autofill(p);
   };
+  async function ytResolve() {
+    const p = parseSongLink(d.link); if (!p || p.kind === 'youtube') return;
+    const t = ti.value.trim(), a = ar.value.trim(); if (!t) return;
+    const key = t + '|' + a; if (key === ytKey) return; ytKey = key;
+    const mh = $('#metaHint'), before = mh ? mh.textContent : '';
+    const id = await ytFind(t, a); if (ytKey !== key || !$('#offerForm')) return;
+    d.yt = id; if (id && mh) mh.textContent = 'Found it on YouTube too, so the preview can play the whole song.'; else if (mh && before) mh.textContent = before;
+    update();
+  }
   link.oninput = note.oninput = ti.oninput = ar.oninput = update; update();
   $$('input[name=mood]').forEach(r => r.onchange = () => { d.mood = r.value; $('#f-label').value = r.value; update(); });
   $('#f-label').onchange = e => { d.mood = e.target.value; $$('input[name=mood]').forEach(x => { x.checked = x.value === d.mood; }); update(); };
@@ -5056,13 +5102,16 @@ function renderUniverse() {
       } catch { at.textContent = 'No preview here (this page may block outside audio). Use the full player below.'; }
       pb.disabled = false;
     };
-    if (link && link.embed) {   // the service's own full player, loaded only when asked for
-      const d = document.createElement('details'); d.className = 'uni-full'; d.innerHTML = '<summary>Play the full song with ' + esc(serviceName(link.kind)) + '’s player</summary>';
-      d.addEventListener('toggle', () => {
-        if (!d.open || d.querySelector('iframe')) return; stopAudio();
-        const box = document.createElement('div'); box.className = 'pp-embed-box uni-player' + (link.kind === 'youtube' ? ' yt' : '');
-        const f = document.createElement('iframe'); f.src = link.embed; f.title = 'Play ' + (s.title || 'song'); f.loading = 'lazy'; f.allow = 'autoplay; clipboard-write; encrypted-media; picture-in-picture'; f.referrerPolicy = 'strict-origin-when-cross-origin'; box.append(f); d.append(box);
-        const note = document.createElement('p'); note.className = 'hint'; note.style.cssText = 'margin:6px 0 0;font-size:.8rem;opacity:.8'; note.textContent = 'Player blank? Some sites and browsers block embedded players. Use the button below to open the song.'; d.append(note);
+    {   // the whole song on this page: the saved YouTube match, or one found now (the service's own player is the fallback)
+      const d = document.createElement('details'); d.className = 'uni-full'; d.innerHTML = '<summary>Play the whole song here</summary>';
+      d.addEventListener('toggle', async () => {
+        if (!d.open || d.querySelector('iframe') || d.dataset.busy) return; stopAudio(); d.dataset.busy = '1';
+        const note = document.createElement('p'); note.className = 'hint'; note.style.cssText = 'margin:6px 0 0;font-size:.8rem;opacity:.85'; note.textContent = 'Finding it on YouTube…'; d.append(note);
+        let id = ytOk(s.yt) ? s.yt : (link && link.kind === 'youtube' ? link.id : ''); if (!id) id = await ytFind(s.title, s.artist);
+        const src = id ? ytEmbedURL(id) : (link && link.embed) || '';
+        if (!src) { note.textContent = 'Could not find a player for this song. Use the button below to open it.'; delete d.dataset.busy; return; }
+        const box = document.createElement('div'); box.className = 'pp-embed-box uni-player yt'; const f = document.createElement('iframe'); f.src = src; f.title = 'Play ' + (s.title || 'song'); f.loading = 'lazy'; f.allow = 'autoplay; clipboard-write; encrypted-media; picture-in-picture'; f.referrerPolicy = 'strict-origin-when-cross-origin'; box.append(f); d.insertBefore(box, note);
+        note.textContent = id ? 'Playing from YouTube. If it stays blank, this page blocks embedded players.' : 'Player blank? Some sites block embedded players. Use the button below to open the song.';
       });
       info.insertBefore(d, row);
     }
@@ -5137,6 +5186,8 @@ document.addEventListener('click', e => { if (e.target.closest('.hero .orb.logo'
 document.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('.hero .orb.logo')) { e.preventDefault(); location.hash = '#universe'; } });
 document.addEventListener('click', e => { const a = e.target.closest('[data-play]'); if (a) a.closest('.pp')?.classList.add('playing'); });
 document.addEventListener('toggle', e => {
+  const y = e.target;
+  if (y instanceof HTMLDetailsElement && y.matches('.pp-yt') && y.open) { const bx = y.querySelector('.pp-embed-box'); if (bx && !bx.firstChild && ytOk(y.dataset.yt)) { const f = document.createElement('iframe'); f.src = ytEmbedURL(y.dataset.yt); f.loading = 'lazy'; f.title = 'Play on YouTube'; f.allow = 'autoplay; clipboard-write; encrypted-media; picture-in-picture'; f.referrerPolicy = 'strict-origin-when-cross-origin'; bx.append(f); } return; }
   const d = e.target;
   if (!(d instanceof HTMLDetailsElement) || !d.matches('.pp-embed') || !d.open) return;
   const box = d.querySelector('.pp-embed-box'); if (box.firstChild) return;
