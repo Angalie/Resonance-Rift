@@ -1620,6 +1620,7 @@ html[data-mode="night"] .taskbtn.on{background:rgba(255,255,255,.3)}
 .ar-tags{display:flex;flex-wrap:wrap;gap:6px}
 .ph-head{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;margin-bottom:24px}
 @media (max-width:560px){.ph-head{grid-template-columns:1fr;justify-items:center}.ph-head>span{display:none}.ph-head .btn{justify-self:center!important}}
+.how-actions .btn{font-family:var(--f-pixel);font-weight:400;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;padding:11px 18px}
 html.popout #dicons,html.popout #stickies,html.popout #task,html.popout #start,html.popout #deskFrame,html.popout #rrWaves{display:none!important}
 html.popout .win:not(.closed){position:fixed!important;left:0!important;top:0!important;right:0!important;bottom:0!important;width:auto!important;height:auto!important;border-radius:0!important}
 html.popout .win .win-btn[data-w="min"],html.popout .win .win-btn[data-w="max"],html.popout .win .win-btn[data-w="pop"],html.popout .win .rh,html.popout .win .rz{display:none!important}
@@ -4295,7 +4296,7 @@ function renderHow() {
       <li><div><b>They accept, you both listen</b><span class="muted">When they accept, you both get a notification. Press ▶ on the song you got, pick an emoji, rate how much it landed, tag its mood, and add a few words if you like.</span></div></li>
       <li><div><b>The seal breaks</b><span class="muted">Their name and their reaction to your song unlock, and you can open each other's profiles once you've both reacted. Add them as a friend, give them cassettes, or send a message.</span></div></li>
     </ol>
-    <div class="row" style="margin-top:30px"><a class="btn primary" href="#find">Find a song</a><a class="btn" href="#submit">Submit a song</a><button type="button" class="btn" id="howTour">Guided walkthrough</button></div>
+    <div class="row how-actions" style="margin-top:30px"><a class="btn primary" href="#find">Find a song</a><a class="btn" href="#submit">Submit a song</a><button type="button" class="btn" id="howTour">Guided walkthrough</button></div>
   </section>`;
   $('#howTour')?.addEventListener('click', () => tourStart('swap'));
 }
