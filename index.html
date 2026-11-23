@@ -1618,6 +1618,8 @@ html[data-mode="night"] .taskbtn.on{background:rgba(255,255,255,.3)}
 .ar-main{display:flex;flex-direction:column;min-width:0;flex:1 1 220px}
 .ar-main b{overflow-wrap:anywhere}
 .ar-tags{display:flex;flex-wrap:wrap;gap:6px}
+.ph-head{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;margin-bottom:24px}
+@media (max-width:560px){.ph-head{grid-template-columns:1fr;justify-items:center}.ph-head>span{display:none}.ph-head .btn{justify-self:center!important}}
 html.popout #dicons,html.popout #stickies,html.popout #task,html.popout #start,html.popout #deskFrame,html.popout #rrWaves{display:none!important}
 html.popout .win:not(.closed){position:fixed!important;left:0!important;top:0!important;right:0!important;bottom:0!important;width:auto!important;height:auto!important;border-radius:0!important}
 html.popout .win .win-btn[data-w="min"],html.popout .win .win-btn[data-w="max"],html.popout .win .win-btn[data-w="pop"],html.popout .win .rh,html.popout .win .rz{display:none!important}
@@ -4387,8 +4389,8 @@ function renderProfile() {
   const dm = { avatar: S.media.avatar, bg: S.media.bg }, dirty = { avatar: false, bg: false };
   const sel = (id, map, val) => `<select id="${id}">${Object.entries(map).map(([k, v]) => `<option value="${k}"${k === val ? ' selected' : ''}>${esc(typeof v === 'string' ? v : v.l)}</option>`).join('')}</select>`;
   const upBtn = (id, text) => `<label class="btn small filebtn" style="margin:0" for="${id}">${text}<input type="file" id="${id}" class="sr" accept="image/png,image/jpeg,image/webp,image/gif"></label>`;
-  view().innerHTML = `<div class="row" style="justify-content:space-between;margin-bottom:24px"><div><p class="eyebrow">Profile</p><h1 style="font-size:clamp(2rem,5vw,2.8rem);margin-top:6px">Make it yours</h1></div>
-    <button class="btn" id="logout" type="button">Log out</button></div>
+  view().innerHTML = `<div class="ph-head"><span aria-hidden="true"></span><div><p class="eyebrow" style="margin-inline:auto">Profile</p><h1 style="font-size:clamp(2rem,5vw,2.8rem);margin:6px auto 0;display:table">Avatar Creator</h1></div>
+    <button class="btn" id="logout" type="button" style="justify-self:end">Log out</button></div>
   <div class="ptabs" role="tablist" aria-label="Profile sections"><button type="button" role="tab" data-ptab="profile" aria-selected="true">Profile</button><button type="button" role="tab" data-ptab="tasks" aria-selected="false">Tasks <small id="taskCount"></small></button></div>
   <section class="panel" id="pixPanel" data-ptabp="profile" style="margin-bottom:22px"><div class="pxlayout"><div>${pixDisplayHTML(u, p, { own: true })}</div><div id="pixEd">${pixEditorHTML(normalizePix(p.pix))}</div></div></section>
   <section class="panel" id="checkPanel" data-ptabp="tasks" hidden style="margin-bottom:22px"><div class="ck-head"><div><h3>Profile checklist</h3><p class="hint ck-sub" style="margin:2px 0 0"></p></div><div class="ck-prog"><div class="ck-bar" role="progressbar" aria-label="Profile completion" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div><b class="ck-pct">0%</b></div></div><ul class="ck-list"></ul></section>
