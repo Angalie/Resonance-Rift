@@ -4319,9 +4319,10 @@ function coverCss(url, w, h, c = {}) {
 }
 /** Avatar (uploaded image, or an initial on your profile colors) inside the chosen frame. */
 function avatarHTML(u, p, media, size = 84) {
-  const t = p.theme, im = safeImg(media?.avatar), f = FRAMES[t.frame] ? t.frame : 'none';
+  const t = p.theme, im = safeImg(media?.avatar), f = FRAMES[t.frame] ? t.frame : 'none';   // no uploaded picture: show the pixel avatar instead of a letter
+  const px = p.pix || u.profile?.pix;
   const inner = im ? `<span class="av-img" style="${coverCss(im.data, im.w, im.h, im.crop)}"></span>`
-    : `<span class="av-img" style="background:${gradCss(t)}">${esc((u.username || '?')[0].toUpperCase())}</span>`;
+    : `<span class="av-img" style="background:${gradCss(t)}">${px ? `<img alt="" src="${pixAvatarURL(normalizePix(px))}" style="width:100%;height:100%;object-fit:cover;image-rendering:pixelated;display:block">` : esc((u.username || '?')[0].toUpperCase())}</span>`;
   return `<span class="avf fr-${f}" style="--sz:${size}px" role="img" aria-label="@${esc(u.username)}'s profile picture">${inner}${(FRAMES[f].deco || []).map((d, i) => `<i class="fd fd${i}" aria-hidden="true">${d}</i>`).join('')}</span>`;
 }
 function nametagHTML(name, kind) {
