@@ -6429,7 +6429,7 @@ function pixDisplayHTML(u, p, { own = false } = {}) {
     '<div class="pxd-lv"><div class="pxd-bat" role="progressbar" aria-label="Level progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + L.pct + '"><i style="width:' + L.pct + '%"></i></div><b>LV. ' + String(L.lv).padStart(2, '0') + '</b><small>XP ' + xp + '</small></div></div>' +
     '<div class="pxd-view" data-z="1"><img class="pxd-room" alt="Pixel avatar of ' + esc(u.username) + ' in their room" width="320" height="180" src="' + pixRoomURL(cfg, rrMode() === 'night') + '"><div class="pxd-zoom" role="group" aria-label="Zoom"><button type="button" data-zoom="out" aria-label="Zoom out" title="Zoom out">−</button><span class="pxd-zl" aria-live="polite">1×</span><button type="button" data-zoom="in" aria-label="Zoom in" title="Zoom in">+</button></div></div>' +
     '<div class="pxd-feel">FEELING: ' + esc(feel.toUpperCase()) + ' <span aria-hidden="true">♥</span></div>' +
-    (own ? '<div class="pxd-btns">' + btn('status', 'heart', 'STATUS') + btn('find', 'cards', 'SWAP') + btn('song', 'envelope', 'SONG') + btn('badges', 'star', 'BADGES') + btn('style', 'bow', 'STYLE') + btn('sleep', 'gear', 'SLEEP') + '</div>' : '') + '</div>';
+    (own ? '<div class="pxd-btns">' + btn('status', 'heart', 'STATUS') + btn('find', 'cards', 'SWAP').replace('class="pxd-b"', 'class="pxd-b" title="Swap the room background" aria-label="Swap the room background"') + btn('song', 'envelope', 'SONG') + btn('badges', 'star', 'BADGES') + btn('style', 'bow', 'STYLE') + btn('sleep', 'gear', 'SLEEP') + '</div>' : '') + '</div>';
 }
 function pixEditorHTML(cfg) {
   const row = (label, body) => '<div class="px-row"><span class="px-l">' + label + '</span><div class="px-c">' + body + '</div></div>';
@@ -6454,7 +6454,10 @@ function pixWire(u, p) {
   root.addEventListener('click', e => {
     const b = e.target.closest('[data-pix]');
     if (b) { const k = b.dataset.pix; p.pix[k] = ['skin', 'hairCol', 'outfitCol', 'eyeCol', 'frameCol', 'trimCol'].includes(k) ? +b.dataset.v : b.dataset.v; if (HX[k]) delete p.pix[HX[k]]; refresh(); save(); return; }
-    if (e.target.closest('#pxRand')) { p.pix = normalizePix(randomPix()); refresh(); save(); }
+    if (e.target.closest('#pxRand')) { p.pix = normalizePix(randomPix()); refresh(); save(); return; }
+    if (e.target.closest('.pxd-b[data-act="find"]')) {   // SWAP: step to the next room background
+      const keys = Object.keys(PIX_OPT.wall), at = keys.indexOf(p.pix.wall); p.pix.wall = keys[(at + 1) % keys.length]; refresh(); save();
+    }
   });
   root.addEventListener('input', e => { const i = e.target.closest('[data-pixc]'); if (!i) return; p.pix[i.dataset.pixc] = i.value.toLowerCase(); refresh(); save(); });
   const onMode = () => { if (!root.isConnected) return window.removeEventListener('rr-mode', onMode); refresh(); };
@@ -6473,7 +6476,6 @@ document.addEventListener('click', e => {
   const go = sel => { const el = document.querySelector(sel); el?.scrollIntoView({ behavior: 'smooth', block: 'center' }); return el; };
   switch (b.dataset.act) {
     case 'status': { const el = go('#pf-status'); el?.focus({ preventScroll: true }); break; }
-    case 'find': location.hash = '#find'; break;
     case 'song': location.hash = '#submit'; break;
     case 'badges': go('.badges'); break;
     case 'style': go('#pixEd'); break;
