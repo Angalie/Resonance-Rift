@@ -1644,6 +1644,8 @@ html[data-mode="night"] .taskbtn.on{background:rgba(255,255,255,.3)}
 .uni-legend b{font-weight:500;color:var(--fg,#fff)}
 /* the storage-mode and draft-security footer is hidden (the text stays in the page for renderFooter) */
 .foot{display:none!important}
+.rr-wordmark{font-family:'Cinzel Decorative','Cinzel','Trajan Pro',serif;font-weight:900;letter-spacing:.14em;font-size:clamp(1.5rem,4.4vw,2.4rem);line-height:1.1;text-align:center;color:#f7edfb;text-shadow:0 0 6px #fb9eb1,0 0 16px #f85677,0 0 34px rgba(226,75,106,.65);margin:4px 0 8px}
+.win[data-wmode="light"] .rr-wordmark{color:#4a1f5b;text-shadow:0 0 10px rgba(255,255,255,.85)}
 html.popout #dicons,html.popout #stickies,html.popout #task,html.popout #start,html.popout #deskFrame,html.popout #rrWaves{display:none!important}
 html.popout .win:not(.closed){position:fixed!important;left:0!important;top:0!important;right:0!important;bottom:0!important;width:auto!important;height:auto!important;border-radius:0!important}
 html.popout .win .win-btn[data-w="min"],html.popout .win .win-btn[data-w="max"],html.popout .win .win-btn[data-w="pop"],html.popout .win .rh,html.popout .win .rz{display:none!important}
@@ -3190,6 +3192,7 @@ async function renderHome() {
   const c = S.counts || {}, waiting = (c.reqs || 0) + (c.todo || 0);
   view().innerHTML = `<section class="hero">
     ${orbLogo(190)}
+    <div class="rr-wordmark" aria-hidden="true">Resonance Rift</div>
     <p class="eyebrow">A listening room for strangers</p>
     <h1>Pick a mood. Meet a stranger's song. <em>Find out who</em> after you listen.</h1>
     <p class="lede">Submit a song, pull one by mood, and offer yours in return. When they accept, you both listen, react, and the seal breaks.</p>
