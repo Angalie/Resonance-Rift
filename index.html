@@ -1384,7 +1384,7 @@ html[data-tone="light"] .dicon.sel{border-color:#521f66}
 .pxd-zl{min-width:2.4ch;text-align:center}
 @media (prefers-reduced-motion:reduce){.pxd-room{transition:none}}
 .pxd-feel{margin:10px 0;padding:7px 12px;text-align:center;background:#d4b0dc;border:3px solid #46235a;border-radius:999px;font-size:.8rem;overflow-wrap:anywhere}
-.pxd-btns{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.pxd-btns{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
 @media (max-width:560px){.pxd-btns{grid-template-columns:repeat(3,1fr)}}
 .pxd-b{appearance:none;-webkit-appearance:none;margin:0;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 2px 4px;background:#ecc2d9;border:3px solid #46235a;border-radius:10px;color:#46235a;font:400 .58rem/1 var(--f-pixel);letter-spacing:.06em;cursor:pointer;box-shadow:2px 2px 0 rgba(70,35,84,.3);transform:none}
 .pxd-b img{width:30px;height:30px;image-rendering:pixelated}
@@ -6429,7 +6429,7 @@ function pixDisplayHTML(u, p, { own = false } = {}) {
     '<div class="pxd-lv"><div class="pxd-bat" role="progressbar" aria-label="Level progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + L.pct + '"><i style="width:' + L.pct + '%"></i></div><b>LV. ' + String(L.lv).padStart(2, '0') + '</b><small>XP ' + xp + '</small></div></div>' +
     '<div class="pxd-view" data-z="1"><img class="pxd-room" alt="Pixel avatar of ' + esc(u.username) + ' in their room" width="320" height="180" src="' + pixRoomURL(cfg, rrMode() === 'night') + '"><div class="pxd-zoom" role="group" aria-label="Zoom"><button type="button" data-zoom="out" aria-label="Zoom out" title="Zoom out">−</button><span class="pxd-zl" aria-live="polite">1×</span><button type="button" data-zoom="in" aria-label="Zoom in" title="Zoom in">+</button></div></div>' +
     '<div class="pxd-feel">FEELING: ' + esc(feel.toUpperCase()) + ' <span aria-hidden="true">♥</span></div>' +
-    (own ? '<div class="pxd-btns">' + btn('status', 'heart', 'STATUS') + btn('find', 'cards', 'SWAP').replace('class="pxd-b"', 'class="pxd-b" title="Swap the room background" aria-label="Swap the room background"') + btn('song', 'envelope', 'SONG') + btn('badges', 'star', 'BADGES') + btn('style', 'bow', 'STYLE') + btn('sleep', 'gear', 'SLEEP') + '</div>' : '') + '</div>';
+    (own ? '<div class="pxd-btns">' + btn('status', 'heart', 'STATUS') + btn('find', 'cards', 'SWAP').replace('class="pxd-b"', 'class="pxd-b" title="Swap the room background" aria-label="Swap the room background"') + btn('song', 'envelope', 'SONG') + btn('badges', 'star', 'BADGES') + btn('style', 'bow', 'STYLE') + '</div>' : '') + '</div>';
 }
 function pixEditorHTML(cfg) {
   const row = (label, body) => '<div class="px-row"><span class="px-l">' + label + '</span><div class="px-c">' + body + '</div></div>';
@@ -6479,7 +6479,6 @@ document.addEventListener('click', e => {
     case 'song': location.hash = '#submit'; break;
     case 'badges': go('.badges'); break;
     case 'style': go('#pixEd'); break;
-    case 'sleep': setWinMode('rr', rrMode() === 'night' ? 'light' : 'night'); break;
   }
 });
 
