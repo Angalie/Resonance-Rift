@@ -1649,6 +1649,47 @@ html[data-mode="night"] .taskbtn.on{background:rgba(255,255,255,.3)}
 .foot{display:none!important}
 .rr-wordmark{font-family:'Cinzel Decorative','Cinzel','Trajan Pro',serif;font-weight:900;letter-spacing:.14em;font-size:clamp(1.5rem,4.4vw,2.4rem);line-height:1.1;text-align:center;color:#f7edfb;text-shadow:0 0 6px #fb9eb1,0 0 16px #f85677,0 0 34px rgba(226,75,106,.65);margin:4px 0 8px}
 .win[data-wmode="light"] .rr-wordmark{color:#4a1f5b;text-shadow:0 0 10px rgba(255,255,255,.85)}
+/* Turntable */
+nav a.tt-tab{font-family:'Cinzel Decorative','Cinzel','Trajan Pro',serif;font-weight:900;letter-spacing:.05em}
+.tt-head{text-align:center;margin-bottom:10px}
+.tt-h1{font-family:'Cinzel Decorative','Cinzel','Trajan Pro',serif!important;font-weight:900!important;letter-spacing:.08em!important;font-size:clamp(1.8rem,4.6vw,2.6rem);margin:4px auto 0;text-shadow:0 0 6px #fb9eb1,0 0 16px rgba(248,86,119,.6)}
+.tt-room{display:grid;grid-template-columns:minmax(150px,1fr) minmax(300px,440px) minmax(150px,1fr);gap:18px;align-items:start;padding:18px;border-radius:16px;border:3px solid #cbbcf0;background:linear-gradient(180deg,#efe6fa,#f9e3ee);box-shadow:inset 0 0 0 3px #f7c9dc,5px 5px 0 rgba(75,61,126,.25);color:#5a3a78}
+.tt-unit{display:flex;flex-direction:column;gap:14px;padding:12px 10px 4px;border:4px solid #c9b3e6;border-radius:10px;background:#f6eefb;box-shadow:inset 0 0 0 3px #e4d6f3}
+.tt-row{display:flex;align-items:flex-end;justify-content:center;gap:3px;min-height:86px;padding:0 4px;border-bottom:7px solid #d9c1ec;box-shadow:0 5px 0 rgba(150,120,200,.25)}
+.tt-rec{appearance:none;position:relative;margin:0;padding:0;border:0;background:none;width:clamp(11px,1.7vw,19px);height:82px;flex:none;cursor:pointer;transform:none;box-shadow:none;transition:transform .15s}
+.tt-rec.ph{cursor:default}
+.tt-rec:not(.ph):hover,.tt-rec.on{transform:translateY(-9px)}
+.tt-rec:focus-visible{outline:3px dashed #8c45a8;outline-offset:2px}
+.tt-sleeve{position:absolute;left:0;right:0;bottom:0;height:calc(58px + var(--k)*2px);background:linear-gradient(90deg,rgba(255,255,255,.35),transparent 30%,rgba(120,90,170,.12)),var(--c);border:2px solid #7a6aa8;border-radius:3px 3px 0 0}
+.tt-disc{position:absolute;left:1px;right:1px;bottom:calc(52px + var(--k)*2px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,var(--c) 0 22%,#4a4166 23% 100%);border:2px solid #4b3d7e}
+.tt-rec.on .tt-sleeve{box-shadow:0 0 0 2px #fff,0 0 12px var(--c)}
+.tt-mid{display:flex;flex-direction:column;align-items:center;gap:12px;min-width:0}
+.tt-deck{width:100%}
+.tt-plinth{position:relative;width:100%;aspect-ratio:1.18;border-radius:18px;border:4px solid #b79fdb;background:linear-gradient(160deg,#fbd9e7,#f3c2d9 60%,#e9b3cf);box-shadow:0 8px 0 #c9a5d9,0 14px 22px rgba(90,60,130,.3),inset 0 0 0 3px #fde9f1}
+.tt-platter{position:absolute;left:5%;top:7%;width:62%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#d7c6f4,#bfa8ea);border:4px solid #8f78c9;box-shadow:inset 0 0 0 5px #ece2fb,0 3px 0 rgba(90,60,130,.35);display:grid;place-items:center}
+.tt-vinyl{position:relative;width:90%;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:repeating-radial-gradient(circle,#3f3758 0 2px,#51486f 3px 4px),#3f3758;box-shadow:0 0 0 2px #2c2640}
+.tt-vinyl::after{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 20deg,transparent 0 18%,rgba(255,255,255,.22) 22%,transparent 28% 68%,rgba(255,255,255,.16) 72%,transparent 78%)}
+.tt-label{width:34%;aspect-ratio:1;border-radius:50%;background:#f9c9de;border:3px solid #fff7fb;box-shadow:inset 0 0 0 2px rgba(75,61,126,.25)}
+.tt-spindle{position:absolute;width:5%;aspect-ratio:1;border-radius:50%;background:#fff;box-shadow:0 0 0 2px #4b3d7e;z-index:1}
+.tt-deck.spin .tt-vinyl{animation:ttSpin 1.8s linear infinite}
+@keyframes ttSpin{to{transform:rotate(360deg)}}
+.tt-arm{position:absolute;right:9%;top:9%;width:7%;aspect-ratio:1;transform-origin:50% 50%;transform:rotate(-28deg);transition:transform .9s cubic-bezier(.3,.7,.3,1)}
+.tt-arm.down{transform:rotate(38deg)}
+.tt-pivot{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#d8c6f4);border:3px solid #8f78c9;z-index:2}
+.tt-bar{position:absolute;left:42%;top:50%;width:16%;height:560%;background:linear-gradient(90deg,#fff,#d8c6f4);border:2px solid #8f78c9;border-radius:6px;transform-origin:50% 0}
+.tt-head2{position:absolute;left:18%;top:560%;width:64%;height:70%;background:#f58ea3;border:2px solid #7a4a6a;border-radius:4px}
+.tt-btn{appearance:none;position:absolute;left:8%;bottom:6%;width:12%;aspect-ratio:1;border-radius:50%;border:3px solid #7a6aa8;background:radial-gradient(circle at 35% 28%,#fff,#f7d3da 55%,#dd8aa0);color:#c4455f;font:700 .9rem/1 var(--f-pixel);cursor:pointer;box-shadow:0 3px 0 rgba(75,61,126,.45);transform:none;display:grid;place-items:center}
+.tt-btn:disabled{opacity:.55;cursor:not-allowed}
+.tt-vol{position:absolute;left:25%;right:26%;bottom:8%;display:flex;align-items:center;gap:6px;font-size:.9rem}
+.tt-vol input{flex:1;min-width:0;accent-color:#d070a0}
+.tt-time{position:absolute;right:8%;bottom:7%;padding:3px 9px;border-radius:6px;background:#4a3a52;color:#f8e8e8;font:400 .85rem/1 var(--f-pixel)}
+.tt-now{text-align:center;display:flex;flex-direction:column;gap:3px;color:inherit}
+.tt-now b{font-size:1.15rem;color:#4b3d7e}
+.tt-now span{font-size:.88rem;opacity:.85}
+.tt-player{width:100%;max-width:440px}
+.tt-embed iframe{width:100%;aspect-ratio:16/9;height:auto;border:3px solid #b79fdb;border-radius:12px;background:#000;display:block}
+@media (max-width:900px){.tt-room{grid-template-columns:1fr}.tt-mid{order:-1}}
+@media (prefers-reduced-motion:reduce){.tt-deck.spin .tt-vinyl{animation:none}}
 html.popout #dicons,html.popout #stickies,html.popout #task,html.popout #start,html.popout #deskFrame,html.popout #rrWaves{display:none!important}
 html.popout .win:not(.closed){position:fixed!important;left:0!important;top:0!important;right:0!important;bottom:0!important;width:auto!important;height:auto!important;border-radius:0!important}
 html.popout .win .win-btn[data-w="min"],html.popout .win .win-btn[data-w="max"],html.popout .win .win-btn[data-w="pop"],html.popout .win .rh,html.popout .win .rz{display:none!important}
@@ -1768,6 +1809,7 @@ html.popout .win .win-btn[data-w="min"],html.popout .win .win-btn[data-w="max"],
       <a href="#home" data-r="home">Home</a>
       <a href="#find" data-r="find">Find</a>
       <a href="#submit" data-r="submit">Submit</a>
+      <a href="#turntable" data-r="turntable" class="tt-tab">Turntable</a>
       <a href="#swaps" data-r="swaps">Swaps<b class="nav-n" id="navSwapsN" hidden></b></a>
       <a href="#profile" data-r="profile">Profile</a>
       <a href="#how" data-r="how">How</a>
@@ -5248,7 +5290,79 @@ function renderUniverse() {
   setScene('solar'); requestAnimationFrame(frame);
 }
 
-const ROUTES = { universe: renderUniverse, home: renderHome, find: renderFind, submit: renderSubmit, swap: renderSwap, swaps: renderSwaps, moods: renderMoods, matches: renderMatches, inbox: renderInbox, person: renderPerson, cassettes: renderCassettes, profile: renderProfile, how: renderHow };
+/* =====================================================================
+   TURNTABLE: a pastel record player in the middle, shelves of vinyls around it (one vinyl per submitted song).
+   Pick a vinyl, the tonearm drops, the platter spins and the song plays through its YouTube player.
+   ===================================================================== */
+const TT_MOOD = { late_night: '#b7bff9', rainy_day: '#a8dcf7', hype: '#ffe69a', heartbreak: '#ffb3c6', focus: '#aef0cf', nostalgic: '#e3c4fb' };
+const TT_SPARE = ['#f9c9de', '#d8c8f7', '#c8e6f9', '#fde3b5', '#cdeedd', '#f2d0f0'];
+async function renderTurntable() {
+  view().innerHTML = `<div class="tt-head"><p class="eyebrow" style="margin-inline:auto">Now spinning</p><h1 class="tt-h1">Turntable</h1></div>
+  <div class="tt-room" id="ttRoom">
+    <div class="tt-unit" id="ttL" aria-label="Records, left shelves"></div>
+    <div class="tt-mid">
+      <div class="tt-deck" id="ttDeck">
+        <div class="tt-plinth">
+          <div class="tt-platter"><div class="tt-vinyl"><span class="tt-label" id="ttLabel"></span><i class="tt-spindle"></i></div></div>
+          <div class="tt-arm" id="ttArm" aria-hidden="true"><i class="tt-pivot"></i><b class="tt-bar"></b><span class="tt-head2"></span></div>
+          <button type="button" class="tt-btn" id="ttPlay" aria-label="Start or stop the record" disabled>▶</button>
+          <div class="tt-vol"><span aria-hidden="true">🔈</span><input type="range" id="ttVol" min="0" max="100" value="80" aria-label="Volume"></div>
+          <div class="tt-time" id="ttTime" aria-hidden="true">0:00</div>
+        </div>
+      </div>
+      <div class="tt-now" id="ttNow"><b>Pick a record from the shelves</b><span>Tap a vinyl and it drops onto the turntable.</span></div>
+      <div class="tt-player" id="ttPlayer"></div>
+    </div>
+    <div class="tt-unit" id="ttR" aria-label="Records, right shelves"></div>
+  </div>`;
+  const room = $('#ttRoom'), deck = $('#ttDeck'), now = $('#ttNow'), pbox = $('#ttPlayer'), btn = $('#ttPlay'), arm = $('#ttArm'), lab = $('#ttLabel');
+  let list = [], cur = null, st = { t: 0, d: 0, playing: false, pt: null, adv: 0, tm: 0 };
+  try { list = (await S.store.listAll()).filter(s => parseSongLink(s.url) && (!s.testFor || s.testFor === me())).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0)).slice(0, 42); } catch { /* the shelves just stay decorative */ }
+  if (S.route !== 'turntable') return;
+  /* shelves: 2 units x 3 rows x 7 records; real songs first, pastel spares fill the rest */
+  const rec = (s, i) => s
+    ? `<button type="button" class="tt-rec" data-id="${esc(s.id)}" style="--c:${TT_MOOD[s.mood] || TT_SPARE[i % TT_SPARE.length]};--k:${(i * 37) % 9}" aria-label="Play ${esc(s.title || 'Untitled')} by ${esc(s.artist || 'unknown')}" title="${esc(s.title || 'Untitled')} · ${esc(s.artist || '')}"><i class="tt-disc"></i><i class="tt-sleeve"></i></button>`
+    : `<span class="tt-rec ph" style="--c:${TT_SPARE[i % TT_SPARE.length]};--k:${(i * 37) % 9}" aria-hidden="true"><i class="tt-disc"></i><i class="tt-sleeve"></i></span>`;
+  const unit = (el, from) => { el.innerHTML = [0, 1, 2].map(row => '<div class="tt-row">' + Array.from({ length: 7 }, (_, c) => rec(list[from + row * 7 + c], from + row * 7 + c)).join('') + '</div>').join(''); };
+  unit($('#ttL'), 0); unit($('#ttR'), 21);
+  /* the player talks to its iframe through YouTube's message channel */
+  const frame = () => pbox.querySelector('iframe[src*="youtube"]');
+  const send = o => { const f = frame(); if (f) { try { f.contentWindow.postMessage(JSON.stringify(o), '*'); } catch { /* not ready */ } } };
+  const cmd = (fn, a = []) => send({ event: 'command', func: fn, args: a });
+  const fmt = t => Math.floor(Math.max(0, t) / 60) + ':' + String(Math.floor(Math.max(0, t) % 60)).padStart(2, '0');
+  const paint = () => { deck.classList.toggle('spin', st.playing); arm.classList.toggle('down', !!cur); btn.textContent = st.playing ? '❚❚' : '▶'; $('#ttTime').textContent = fmt(st.t); };
+  const onMsg = e => {
+    if (!/youtube(-nocookie)?\.com$/.test(String(e.origin).replace(/^https?:\/\//, ''))) return;
+    const f = frame(); if (!f || e.source !== f.contentWindow) return;
+    let m; try { m = typeof e.data === 'string' ? JSON.parse(e.data) : e.data; } catch { return; }
+    if (!m || !m.event) return; const i = m.info;
+    if ((m.event === 'infoDelivery' || m.event === 'initialDelivery') && i) { if (i.currentTime != null) { const d = i.currentTime - (st.pt == null ? i.currentTime : st.pt); if (d > .05 && d < 2.5) st.adv = Date.now(); st.pt = i.currentTime; st.t = i.currentTime; } if (i.duration) st.d = i.duration; if (i.volume != null && !st.v) st.v = i.volume; }
+    else if (m.event === 'onStateChange') { if (i === 1) st.adv = Date.now(); if (i === 2 || i === 0) st.adv = 0; }
+    else return;
+    st.playing = Date.now() - st.adv < 1300; clearTimeout(st.tm); st.tm = setTimeout(() => { if (Date.now() - st.adv >= 1300 && st.playing) { st.playing = false; paint(); } }, 1400);
+    paint();
+  };
+  window.addEventListener('message', onMsg); S.unsubs.push(() => window.removeEventListener('message', onMsg));
+  btn.onclick = () => { if (!cur) return; cmd(st.playing ? 'pauseVideo' : 'playVideo'); if (st.playing) { st.playing = false; st.adv = 0; paint(); } };
+  $('#ttVol').oninput = e => cmd('setVolume', [+e.target.value]);
+  const load = async s => {
+    cur = s; st = { t: 0, d: 0, playing: false, pt: null, adv: 0, tm: 0 };
+    room.querySelectorAll('.tt-rec.on').forEach(x => x.classList.remove('on')); room.querySelector('.tt-rec[data-id="' + CSS.escape(s.id) + '"]')?.classList.add('on');
+    lab.style.background = TT_MOOD[s.mood] || '#f9c9de'; btn.disabled = false; paint();
+    const m = moodOf(s.mood); now.innerHTML = '<b></b><span></span>'; now.firstChild.textContent = s.title || 'Untitled'; now.lastChild.textContent = (s.artist || 'Unknown artist') + (m ? ' · ' + m.l : '') + (s.cosmic ? ' · ' + s.cosmic : '');
+    pbox.innerHTML = '<p class="hint" style="text-align:center;margin:10px 0 0">Putting the needle down…</p>';
+    const link = parseSongLink(s.url);
+    let id = ytOk(s.yt) ? s.yt : (link && link.kind === 'youtube' ? link.id : ''); if (!id) id = await ytFind(s.title, s.artist);
+    if (cur !== s) return;
+    const src = id ? ytEmbedURL(id) : (link && link.embed) || '';
+    if (!src) { pbox.innerHTML = '<p class="hint" style="text-align:center;margin:10px 0 0">No player found for this record. <a href="' + esc(link ? link.url : '#') + '" target="_blank" rel="noopener noreferrer">Open the song</a></p>'; return; }
+    pbox.innerHTML = '<div class="pp-embed-box yt tt-embed"><iframe title="Play ' + esc(s.title || 'song') + '" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>' + (id ? '' : '<p class="hint" style="text-align:center;margin:6px 0 0">No YouTube match, so this is the song\'s own player.</p>');
+    const f = pbox.querySelector('iframe'); f.addEventListener('load', () => { const hi = () => send({ event: 'listening', id: 1, channel: 'widget' }); hi(); setTimeout(hi, 900); setTimeout(hi, 2500); setTimeout(() => { cmd('setVolume', [+$('#ttVol').value]); cmd('playVideo'); }, 1500); });   // the needle drops: try to start it right away
+    f.src = src;
+  };
+  room.addEventListener('click', e => { const b = e.target.closest('.tt-rec[data-id]'); if (!b) return; const s = list.find(x => x.id === b.dataset.id); if (s) load(s); });
+}
+const ROUTES = { turntable: renderTurntable, universe: renderUniverse, home: renderHome, find: renderFind, submit: renderSubmit, swap: renderSwap, swaps: renderSwaps, moods: renderMoods, matches: renderMatches, inbox: renderInbox, person: renderPerson, cassettes: renderCassettes, profile: renderProfile, how: renderHow };
 function render() {
   clearLive();
   if (S.user) { view().classList.remove('login-bg'); document.getElementById('rrBody')?.classList.remove('rr-login'); }
