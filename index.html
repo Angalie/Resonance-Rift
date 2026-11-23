@@ -5080,45 +5080,49 @@ function renderUniverse() {
     $('.uni-stats', info).innerHTML = '<div><dt>Label</dt><dd style="color:' + (MOOD_GLOW[s.mood] || '#fff') + '">' + esc(m ? m.l : 'Unknown') + '</dd></div><div><dt>Cosmic Object</dt><dd>' + esc(s.cosmic || '') + '</dd></div>';
     const row = $('.row', info);
     stopAudio();
-    /* a little player of our own: a 30-second preview (Apple's public preview clips) that plays right here; the service's full player opens below on request */
-    const ab = document.createElement('div'); ab.className = 'uni-audio';
-    ab.innerHTML = '<button type="button" class="uni-play" aria-label="Play preview">▶</button><div class="uni-ab"><div class="uni-at"></div><div class="uni-prog" aria-hidden="true"><b></b></div></div>';
-    info.insertBefore(ab, row);
-    const pb = $('.uni-play', ab), at = $('.uni-at', ab), pg = $('.uni-prog b', ab);
-    at.textContent = 'Press play for a 30-second preview';
-    pb.onclick = async () => {
-      if (curAudio) { if (curAudio.paused) curAudio.play().catch(() => {}); else curAudio.pause(); return; }
-      at.textContent = 'Finding the preview…'; pb.disabled = true;
-      try {
-        const ctl = new AbortController(), tm = setTimeout(() => ctl.abort(), 6000);
-        const j = await (await fetch('https://itunes.apple.com/search?entity=song&limit=15&term=' + encodeURIComponent(((s.title || '') + ' ' + (s.artist || '')).trim()), { signal: ctl.signal })).json(); clearTimeout(tm);
-        const nz = x => String(x || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim(), T = nz(s.title), A = nz(s.artist), list = (j.results || []).filter(x => x.previewUrl);
-        const hit = list.find(x => nz(x.trackName) === T && (!A || nz(x.artistName).includes(A) || A.includes(nz(x.artistName)))) || list.find(x => nz(x.trackName).includes(T) && (!A || nz(x.artistName).includes(A))) || list[0];
-        if (!hit) throw new Error('none');
-        const au = new Audio(hit.previewUrl); curAudio = au; at.textContent = hit.trackName + ' · ' + hit.artistName + ' (30 s preview)';
-        au.addEventListener('timeupdate', () => { pg.style.width = (au.currentTime / (au.duration || 30) * 100) + '%'; });
-        au.addEventListener('play', () => { pb.textContent = '❚❚'; pb.setAttribute('aria-label', 'Pause'); });
-        au.addEventListener('pause', () => { pb.textContent = '▶'; pb.setAttribute('aria-label', 'Play preview'); });
-        au.addEventListener('ended', () => { pg.style.width = '0'; });
-        au.addEventListener('error', () => { at.textContent = 'This browser could not play the preview. Use the full player below.'; });
-        await au.play();
-      } catch { at.textContent = 'No preview here (this page may block outside audio). Use the full player below.'; }
-      pb.disabled = false;
+    /* the song plays right here: the YouTube match goes straight into the card (saved with the song, or found now). Only when no YouTube match can be found does it fall back to a 30-second preview. */
+    const stage = document.createElement('div'); stage.className = 'uni-stage2';
+    stage.innerHTML = '<p class="hint" style="margin:12px 0 0">Finding it on YouTube…</p>';
+    info.insertBefore(stage, row);
+    const previewWidget = () => {
+      const ab = document.createElement('div'); ab.className = 'uni-audio';
+      ab.innerHTML = '<button type="button" class="uni-play" aria-label="Play preview">▶</button><div class="uni-ab"><div class="uni-at"></div><div class="uni-prog" aria-hidden="true"><b></b></div></div>';
+      stage.append(ab);
+      const pb = $('.uni-play', ab), at = $('.uni-at', ab), pg = $('.uni-prog b', ab);
+      at.textContent = 'No YouTube match found. Press play for a 30-second preview.';
+      pb.onclick = async () => {
+        if (curAudio) { if (curAudio.paused) curAudio.play().catch(() => {}); else curAudio.pause(); return; }
+        at.textContent = 'Finding the preview…'; pb.disabled = true;
+        try {
+          const ctl = new AbortController(), tm = setTimeout(() => ctl.abort(), 6000);
+          const j = await (await fetch('https://itunes.apple.com/search?entity=song&limit=15&term=' + encodeURIComponent(((s.title || '') + ' ' + (s.artist || '')).trim()), { signal: ctl.signal })).json(); clearTimeout(tm);
+          const nz = x => String(x || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim(), T = nz(s.title), A = nz(s.artist), list = (j.results || []).filter(x => x.previewUrl);
+          const hit = list.find(x => nz(x.trackName) === T && (!A || nz(x.artistName).includes(A) || A.includes(nz(x.artistName)))) || list.find(x => nz(x.trackName).includes(T) && (!A || nz(x.artistName).includes(A))) || list[0];
+          if (!hit) throw new Error('none');
+          const au = new Audio(hit.previewUrl); curAudio = au; at.textContent = hit.trackName + ' · ' + hit.artistName + ' (30 s preview)';
+          au.addEventListener('timeupdate', () => { pg.style.width = (au.currentTime / (au.duration || 30) * 100) + '%'; });
+          au.addEventListener('play', () => { pb.textContent = '❚❚'; pb.setAttribute('aria-label', 'Pause'); });
+          au.addEventListener('pause', () => { pb.textContent = '▶'; pb.setAttribute('aria-label', 'Play preview'); });
+          au.addEventListener('ended', () => { pg.style.width = '0'; });
+          au.addEventListener('error', () => { at.textContent = 'This browser could not play the preview.'; });
+          await au.play();
+        } catch { at.textContent = 'No preview here (this page blocks outside audio and lookups). Use the buttons below.'; }
+        pb.disabled = false;
+      };
     };
-    {   // the whole song on this page: the saved YouTube match, or one found now (the service's own player is the fallback)
-      const d = document.createElement('details'); d.className = 'uni-full'; d.innerHTML = '<summary>Play the whole song here</summary>';
-      d.addEventListener('toggle', async () => {
-        if (!d.open || d.querySelector('iframe') || d.dataset.busy) return; stopAudio(); d.dataset.busy = '1';
-        const note = document.createElement('p'); note.className = 'hint'; note.style.cssText = 'margin:6px 0 0;font-size:.8rem;opacity:.85'; note.textContent = 'Finding it on YouTube…'; d.append(note);
-        let id = ytOk(s.yt) ? s.yt : (link && link.kind === 'youtube' ? link.id : ''); if (!id) id = await ytFind(s.title, s.artist);
-        const src = id ? ytEmbedURL(id) : (link && link.embed) || '';
-        if (!src) { note.textContent = 'Could not find a player for this song. Use the button below to open it.'; delete d.dataset.busy; return; }
-        const box = document.createElement('div'); box.className = 'pp-embed-box uni-player yt'; const f = document.createElement('iframe'); f.src = src; f.title = 'Play ' + (s.title || 'song'); f.loading = 'lazy'; f.allow = 'autoplay; clipboard-write; encrypted-media; picture-in-picture'; f.referrerPolicy = 'strict-origin-when-cross-origin'; box.append(f); d.insertBefore(box, note);
-        note.textContent = id ? 'Playing from YouTube. If it stays blank, this page blocks embedded players.' : 'Player blank? Some sites block embedded players. Use the button below to open the song.';
-      });
-      info.insertBefore(d, row);
-    }
+    (async () => {
+      let id = ytOk(s.yt) ? s.yt : (link && link.kind === 'youtube' ? link.id : '');
+      if (!id) id = await ytFind(s.title, s.artist);
+      if (!stage.isConnected) return;   // the card was changed while we were looking
+      stage.innerHTML = '';
+      if (id) {
+        const box = document.createElement('div'); box.className = 'pp-embed-box uni-player yt';
+        const f = document.createElement('iframe'); f.src = ytEmbedURL(id) + '?rel=0&playsinline=1'; f.title = 'Play ' + (s.title || 'song'); f.allow = 'autoplay; clipboard-write; encrypted-media; picture-in-picture'; f.allowFullscreen = true; f.referrerPolicy = 'strict-origin-when-cross-origin'; box.append(f); stage.append(box);
+        const n = document.createElement('p'); n.className = 'hint'; n.style.cssText = 'margin:6px 0 0;font-size:.8rem;opacity:.85'; n.textContent = 'Press the red play button. If the video stays blank or shows an error, this page blocks YouTube embeds; try the site on GitHub.'; stage.append(n);
+      } else previewWidget();
+    })();
     if (link) { const a = document.createElement('a'); a.className = 'btn small'; a.href = link.url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = 'Open on ' + serviceName(link.kind); row.append(a); }
+    { const yq = document.createElement('a'); yq.className = 'btn small'; yq.href = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(((s.title || '') + ' ' + (s.artist || '')).trim()); yq.target = '_blank'; yq.rel = 'noopener noreferrer'; yq.textContent = 'Search on YouTube'; row.append(yq); }
     const b = document.createElement('button'); b.type = 'button'; b.className = 'btn small'; b.textContent = 'Back to ' + (byId[sel] ? byId[sel].name : 'the list'); b.onclick = () => { starSel = null; if (fromCluster && backGroup) showCluster(backGroup); else if (sel && byId[sel]) showInfo(byId[sel]); }; if (fromCluster && backGroup) b.textContent = 'Back to ' + (backGroup.artist || 'the cluster'); row.append(b);
   };
   const drawChips = () => { chips.innerHTML = (scene === 'solar' ? UNI_SOLAR : UNI_GALAXY).map(o => '<button type="button" class="uni-chip" data-o="' + o.id + '" aria-pressed="' + (sel === o.id) + '">' + esc(o.name) + '</button>').join(''); };
