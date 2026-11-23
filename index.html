@@ -4389,7 +4389,7 @@ function renderProfile() {
   const dm = { avatar: S.media.avatar, bg: S.media.bg }, dirty = { avatar: false, bg: false };
   const sel = (id, map, val) => `<select id="${id}">${Object.entries(map).map(([k, v]) => `<option value="${k}"${k === val ? ' selected' : ''}>${esc(typeof v === 'string' ? v : v.l)}</option>`).join('')}</select>`;
   const upBtn = (id, text) => `<label class="btn small filebtn" style="margin:0" for="${id}">${text}<input type="file" id="${id}" class="sr" accept="image/png,image/jpeg,image/webp,image/gif"></label>`;
-  view().innerHTML = `<div class="ph-head"><span aria-hidden="true"></span><div><p class="eyebrow" style="margin-inline:auto">Profile</p><h1 style="font-size:clamp(2rem,5vw,2.8rem);margin:6px auto 0;display:table">Avatar Creator</h1></div>
+  view().innerHTML = `<div class="ph-head"><span aria-hidden="true"></span><div><p class="eyebrow" style="margin-inline:auto">Profile</p><h1 style="font-family:var(--f-pixel);font-weight:400;letter-spacing:.06em;text-transform:uppercase;font-size:clamp(1.5rem,4vw,2.2rem);margin:6px auto 0;display:table">Avatar Creator</h1></div>
     <button class="btn" id="logout" type="button" style="justify-self:end">Log out</button></div>
   <div class="ptabs" role="tablist" aria-label="Profile sections"><button type="button" role="tab" data-ptab="profile" aria-selected="true">Profile</button><button type="button" role="tab" data-ptab="tasks" aria-selected="false">Tasks <small id="taskCount"></small></button></div>
   <section class="panel" id="pixPanel" data-ptabp="profile" style="margin-bottom:22px"><div class="pxlayout"><div>${pixDisplayHTML(u, p, { own: true })}</div><div id="pixEd">${pixEditorHTML(normalizePix(p.pix))}</div></div></section>
