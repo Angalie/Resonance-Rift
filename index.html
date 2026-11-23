@@ -1621,6 +1621,8 @@ html[data-mode="night"] .taskbtn.on{background:rgba(255,255,255,.3)}
 .ph-head{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;margin-bottom:24px}
 @media (max-width:560px){.ph-head{grid-template-columns:1fr;justify-items:center}.ph-head>span{display:none}.ph-head .btn{justify-self:center!important}}
 .how-actions .btn{font-family:var(--f-pixel);font-weight:400;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;padding:11px 18px}
+.uni-player iframe{width:100%;height:152px;border:2px solid rgba(255,255,255,.3);border-radius:12px;margin:10px 0 0;background:#000;display:block}
+.uni-player.yt iframe{height:auto;aspect-ratio:16/9}
 .uni-songs{display:flex;flex-direction:column;gap:6px;margin-top:10px;max-height:210px;overflow:auto}
 .uni-song{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:8px 10px;border-radius:8px;border:2px solid var(--line-2,rgba(255,255,255,.3));background:rgba(255,255,255,.06);color:inherit;font:inherit;cursor:pointer}
 .uni-song:hover{background:rgba(255,255,255,.14)}
@@ -5005,7 +5007,12 @@ function renderUniverse() {
     $('.uni-name', info).textContent = s.title || 'Untitled'; $('.uni-kind', info).textContent = (s.artist || 'Unknown artist') + ' · a star near ' + (byId[sel] ? byId[sel].name : 'here'); $('.uni-desc', info).textContent = s.note ? '“' + s.note + '”' : '';
     $('.uni-stats', info).innerHTML = '<div><dt>Label</dt><dd style="color:' + (MOOD_GLOW[s.mood] || '#fff') + '">' + esc(m ? m.l : 'Unknown') + '</dd></div><div><dt>Cosmic Object</dt><dd>' + esc(s.cosmic || '') + '</dd></div>';
     const row = $('.row', info);
-    if (link) { const a = document.createElement('a'); a.className = 'btn small primary'; a.href = link.url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = 'Listen on ' + serviceName(link.kind); row.append(a); }
+    if (link && link.embed) {   // play it right here with the service's own embedded player
+      const box = document.createElement('div'); box.className = 'pp-embed-box uni-player' + (link.kind === 'youtube' ? ' yt' : '');
+      const f = document.createElement('iframe'); f.src = link.embed; f.title = 'Play ' + (s.title || 'song'); f.loading = 'lazy'; f.allow = 'autoplay; clipboard-write; encrypted-media; picture-in-picture'; f.referrerPolicy = 'strict-origin-when-cross-origin'; box.append(f);
+      info.insertBefore(box, row);
+    }
+    if (link) { const a = document.createElement('a'); a.className = 'btn small'; a.href = link.url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = link.embed ? 'Not playing? Open on ' + serviceName(link.kind) : 'Listen on ' + serviceName(link.kind); row.append(a); }
     const b = document.createElement('button'); b.type = 'button'; b.className = 'btn small'; b.textContent = 'Back to ' + (byId[sel] ? byId[sel].name : 'the list'); b.onclick = () => { starSel = null; if (fromCluster && backGroup) showCluster(backGroup); else if (sel && byId[sel]) showInfo(byId[sel]); }; if (fromCluster && backGroup) b.textContent = 'Back to ' + (backGroup.artist || 'the cluster'); row.append(b);
   };
   const drawChips = () => { chips.innerHTML = (scene === 'solar' ? UNI_SOLAR : UNI_GALAXY).map(o => '<button type="button" class="uni-chip" data-o="' + o.id + '" aria-pressed="' + (sel === o.id) + '">' + esc(o.name) + '</button>').join(''); };
