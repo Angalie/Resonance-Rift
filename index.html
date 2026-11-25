@@ -1663,6 +1663,32 @@ nav a.tt-tab{font-family:'Cinzel Decorative','Cinzel','Trajan Pro',serif;font-we
 .tt-sleeve{position:absolute;left:0;right:0;bottom:0;height:calc(58px + var(--k)*2px);background:linear-gradient(90deg,rgba(255,255,255,.35),transparent 30%,rgba(120,90,170,.12)),var(--c);border:2px solid #7a6aa8;border-radius:3px 3px 0 0}
 .tt-disc{position:absolute;left:1px;right:1px;bottom:calc(52px + var(--k)*2px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,var(--c) 0 22%,#4a4166 23% 100%);border:2px solid #4b3d7e}
 .tt-rec.on .tt-sleeve{box-shadow:0 0 0 2px #fff,0 0 12px var(--c)}
+.tt-rec.out,.tt-rec.on{opacity:.4}
+.tt-rec.out{transform:translateY(-14px)}
+.tt-stage{width:100%;max-width:300px;display:flex;flex-direction:column;align-items:center;gap:10px;padding-top:6px}
+.tt-stage[hidden]{display:none}
+.tt-pull{position:relative;width:min(100%,210px);aspect-ratio:1;margin-top:38px;animation:ttPullIn .55s cubic-bezier(.2,.9,.3,1.1) both}
+@keyframes ttPullIn{from{transform:translateY(70px) scale(.7);opacity:0}to{transform:none;opacity:1}}
+.tt-sl{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;padding:12px;border:4px solid #7a6aa8;border-radius:8px;overflow:hidden;color:#4b3d7e;box-shadow:4px 4px 0 rgba(75,61,126,.35);
+  background:radial-gradient(circle at 70% 28%,rgba(255,255,255,.85) 0 11%,transparent 12%),repeating-conic-gradient(rgba(255,255,255,.28) 0 25%,transparent 0 50%) 0 0/22px 22px,linear-gradient(160deg,rgba(255,255,255,.4),transparent 55%),var(--c)}
+.tt-sl::before{content:"";position:absolute;left:-10%;right:-10%;top:30%;height:7px;background:rgba(255,255,255,.65);transform:rotate(-8deg)}
+.tt-ct{position:relative;font:700 1.02rem/1.15 var(--f-body);overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;background:rgba(255,255,255,.72);padding:3px 6px;border-radius:5px}
+.tt-ca{position:relative;font:400 .8rem/1.2 var(--f-pixel);background:rgba(75,61,126,.82);color:#fff;padding:3px 6px;border-radius:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tt-cdisc{appearance:none;position:absolute;z-index:0;left:8%;right:8%;top:-20%;aspect-ratio:1;margin:0;padding:0;border:0;border-radius:50%;cursor:grab;touch-action:none;
+  background:radial-gradient(circle,#fff 0 3%,var(--c) 4% 20%,#fff7fb 21% 23%,transparent 24%),repeating-radial-gradient(circle,#3f3758 0 2px,#51486f 3px 4px),#3f3758;box-shadow:0 0 0 2px #2c2640;transition:transform .6s cubic-bezier(.4,.1,.3,1),opacity .35s .3s}
+.tt-cdisc:hover,.tt-cdisc:focus-visible{transform:translateY(-9%)}
+.tt-cdisc.drag{transition:none;cursor:grabbing}
+.tt-stage.placing .tt-cdisc{z-index:2;transform:translateY(215%) scale(.7);opacity:0;pointer-events:none}
+.tt-sact{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.tt-sact button{appearance:none;margin:0;font:700 .85rem/1 var(--f-body);padding:9px 14px;border-radius:999px;border:3px solid #7a6aa8;background:#fff7fb;color:#4b3d7e;cursor:pointer;box-shadow:0 3px 0 rgba(75,61,126,.35);transform:none}
+.tt-sact .tt-take{background:#f58ea3;color:#4b1f33;border-color:#7a4a6a}
+.tt-sact button:hover{filter:brightness(1.05)}
+.tt-sact button:focus-visible{outline:3px dashed #8c45a8;outline-offset:2px}
+.tt-hintline{font-size:.8rem;opacity:.85;text-align:center}
+.tt-deck.dropin .tt-vinyl{animation:ttDropIn .5s cubic-bezier(.2,.9,.3,1.2) both}
+.tt-deck.spin.dropin .tt-vinyl{animation:ttDropIn .5s cubic-bezier(.2,.9,.3,1.2) both,ttSpin 1.8s .5s linear infinite}
+@keyframes ttDropIn{from{transform:translateY(-30%) scale(1.25);opacity:0}to{transform:none;opacity:1}}
+.tt-deck:not(.has) .tt-vinyl{opacity:.35}
 .tt-mid{display:flex;flex-direction:column;align-items:center;gap:12px;min-width:0}
 .tt-deck{width:100%}
 .tt-plinth{position:relative;width:100%;aspect-ratio:1.18;border-radius:18px;border:4px solid #b79fdb;background:linear-gradient(160deg,#fbd9e7,#f3c2d9 60%,#e9b3cf);box-shadow:0 8px 0 #c9a5d9,0 14px 22px rgba(90,60,130,.3),inset 0 0 0 3px #fde9f1}
@@ -1689,7 +1715,7 @@ nav a.tt-tab{font-family:'Cinzel Decorative','Cinzel','Trajan Pro',serif;font-we
 .tt-player{width:100%;max-width:440px}
 .tt-embed iframe{width:100%;aspect-ratio:16/9;height:auto;border:3px solid #b79fdb;border-radius:12px;background:#000;display:block}
 @media (max-width:900px){.tt-room{grid-template-columns:1fr}.tt-mid{order:-1}}
-@media (prefers-reduced-motion:reduce){.tt-deck.spin .tt-vinyl{animation:none}}
+@media (prefers-reduced-motion:reduce){.tt-deck.spin .tt-vinyl,.tt-deck.dropin .tt-vinyl,.tt-pull{animation:none!important}.tt-cdisc{transition:none}}
 html.popout #dicons,html.popout #stickies,html.popout #task,html.popout #start,html.popout #deskFrame,html.popout #rrWaves{display:none!important}
 html.popout .win:not(.closed){position:fixed!important;left:0!important;top:0!important;right:0!important;bottom:0!important;width:auto!important;height:auto!important;border-radius:0!important}
 html.popout .win .win-btn[data-w="min"],html.popout .win .win-btn[data-w="max"],html.popout .win .win-btn[data-w="pop"],html.popout .win .rh,html.popout .win .rz{display:none!important}
@@ -1809,7 +1835,7 @@ html.popout .win .win-btn[data-w="min"],html.popout .win .win-btn[data-w="max"],
       <a href="#home" data-r="home">Home</a>
       <a href="#find" data-r="find">Find</a>
       <a href="#submit" data-r="submit">Submit</a>
-      <a href="#turntable" data-r="turntable" class="tt-tab">Turntable</a>
+      <a href="#turntable" data-r="turntable" class="tt-tab">Resonate</a>
       <a href="#swaps" data-r="swaps">Swaps<b class="nav-n" id="navSwapsN" hidden></b></a>
       <a href="#profile" data-r="profile">Profile</a>
       <a href="#how" data-r="how">How</a>
@@ -5297,10 +5323,11 @@ function renderUniverse() {
 const TT_MOOD = { late_night: '#b7bff9', rainy_day: '#a8dcf7', hype: '#ffe69a', heartbreak: '#ffb3c6', focus: '#aef0cf', nostalgic: '#e3c4fb' };
 const TT_SPARE = ['#f9c9de', '#d8c8f7', '#c8e6f9', '#fde3b5', '#cdeedd', '#f2d0f0'];
 async function renderTurntable() {
-  view().innerHTML = `<div class="tt-head"><p class="eyebrow" style="margin-inline:auto">Now spinning</p><h1 class="tt-h1">Turntable</h1></div>
+  view().innerHTML = `<div class="tt-head"><p class="eyebrow" style="margin-inline:auto">Now spinning</p><h1 class="tt-h1">Resonate</h1></div>
   <div class="tt-room" id="ttRoom">
     <div class="tt-unit" id="ttL" aria-label="Records, left shelves"></div>
     <div class="tt-mid">
+      <div class="tt-stage" id="ttStage" role="group" aria-label="Record you pulled out" hidden></div>
       <div class="tt-deck" id="ttDeck">
         <div class="tt-plinth">
           <div class="tt-platter"><div class="tt-vinyl"><span class="tt-label" id="ttLabel"></span><i class="tt-spindle"></i></div></div>
@@ -5310,7 +5337,7 @@ async function renderTurntable() {
           <div class="tt-time" id="ttTime" aria-hidden="true">0:00</div>
         </div>
       </div>
-      <div class="tt-now" id="ttNow"><b>Pick a record from the shelves</b><span>Tap a vinyl and it drops onto the turntable.</span></div>
+      <div class="tt-now" id="ttNow"><b>Pick a record from the shelves</b><span>Tap a vinyl to pull it out and see its cover, then slide the record out and onto the turntable.</span></div>
       <div class="tt-player" id="ttPlayer"></div>
     </div>
     <div class="tt-unit" id="ttR" aria-label="Records, right shelves"></div>
@@ -5360,7 +5387,30 @@ async function renderTurntable() {
     const f = pbox.querySelector('iframe'); f.addEventListener('load', () => { const hi = () => send({ event: 'listening', id: 1, channel: 'widget' }); hi(); setTimeout(hi, 900); setTimeout(hi, 2500); setTimeout(() => { cmd('setVolume', [+$('#ttVol').value]); cmd('playVideo'); }, 1500); });   // the needle drops: try to start it right away
     f.src = src;
   };
-  room.addEventListener('click', e => { const b = e.target.closest('.tt-rec[data-id]'); if (!b) return; const s = list.find(x => x.id === b.dataset.id); if (s) load(s); });
+  /* pull a record off the shelf: its sleeve (cover) slides out with the vinyl peeking from the top; click or drag the vinyl onto the turntable */
+  const stage = $('#ttStage'); let held = null, heldBtn = null, busy = false;
+  const clearStage = () => { stage.hidden = true; stage.innerHTML = ''; stage.classList.remove('placing'); };
+  const putBack = () => { if (busy) return; if (heldBtn) heldBtn.classList.remove('out'); held = heldBtn = null; clearStage(); };
+  const take = () => {
+    if (!held || busy) return; busy = true; const s = held, b = heldBtn; stage.classList.add('placing');
+    setTimeout(() => { busy = false; if (S.route !== 'turntable') return; b && b.classList.remove('out'); held = heldBtn = null; clearStage(); deck.classList.remove('dropin'); void deck.offsetWidth; deck.classList.add('dropin', 'has'); load(s); }, 700);
+  };
+  const pull = (s, b) => {
+    if (busy) return; putBack(); held = s; heldBtn = b; b.classList.add('out');
+    const c = TT_MOOD[s.mood] || '#f9c9de';
+    stage.style.setProperty('--c', c); stage.hidden = false;
+    stage.innerHTML = '<div class="tt-pull"><button type="button" class="tt-cdisc" aria-label="Slide the record out of its sleeve onto the turntable"></button><div class="tt-sl"><span class="tt-ct">' + esc(s.title || 'Untitled') + '</span><span class="tt-ca">' + esc(s.artist || 'Unknown artist') + '</span></div></div><p class="tt-hintline">Drag the record down, or tap it, to place it on the turntable.</p><div class="tt-sact"><button type="button" class="tt-take">Place on turntable</button><button type="button" class="tt-back">Put back</button></div>';
+    const d = stage.querySelector('.tt-cdisc'); let sx = 0, sy = 0, down = false, moved = false;
+    d.addEventListener('pointerdown', ev => { down = true; moved = false; sx = ev.clientX; sy = ev.clientY; try { d.setPointerCapture(ev.pointerId); } catch { /* fine */ } });
+    d.addEventListener('pointermove', ev => { if (!down) return; const dx = ev.clientX - sx, dy = ev.clientY - sy; if (Math.abs(dx) + Math.abs(dy) > 6) { moved = true; d.classList.add('drag'); d.style.transform = 'translate(' + dx + 'px,' + dy + 'px)'; } });
+    const end = ev => { if (!down) return; down = false; const dy = ev.clientY - sy, dx = ev.clientX - sx; d.classList.remove('drag'); d.style.transform = ''; if (!moved || dy > 50 || Math.hypot(dx, dy) > 90) take(); };
+    d.addEventListener('pointerup', end); d.addEventListener('pointercancel', () => { down = false; d.classList.remove('drag'); d.style.transform = ''; });
+    d.addEventListener('keydown', ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); take(); } });
+    stage.querySelector('.tt-take').onclick = take; stage.querySelector('.tt-back').onclick = putBack;
+    d.focus({ preventScroll: true });
+  };
+  room.addEventListener('click', e => { const b = e.target.closest('.tt-rec[data-id]'); if (!b) return; const s = list.find(x => x.id === b.dataset.id); if (s) pull(s, b); });
+  room.addEventListener('keydown', e => { if (e.key === 'Escape') putBack(); });
 }
 const ROUTES = { turntable: renderTurntable, universe: renderUniverse, home: renderHome, find: renderFind, submit: renderSubmit, swap: renderSwap, swaps: renderSwaps, moods: renderMoods, matches: renderMatches, inbox: renderInbox, person: renderPerson, cassettes: renderCassettes, profile: renderProfile, how: renderHow };
 function render() {
